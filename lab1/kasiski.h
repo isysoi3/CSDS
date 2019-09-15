@@ -9,4 +9,6 @@
 
 int getKeyLength(std::string text);
 
+std::string getKey(int keyLength, std::string text, const std::map <char ,int>& lettersFreq);
+
 #endif //LAB1_KASISKI_H
