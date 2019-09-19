@@ -33,24 +33,69 @@ std::map <char ,int> enLettersFreq = {
         {'Z', 0.00074}
 };
 
-int main() {
-    std::ifstream fin("in.txt");
-    std::ofstream fout("out.txt");
-    std::string keyword;
-    std::cin >> keyword;
+std::string readFromFileAndDoSomeWork(std::string fileName, std::string key) {
+    std::ifstream fin(fileName);
     std::string text((std::istreambuf_iterator<char>(fin)),
-                    std::istreambuf_iterator<char>());
+                     std::istreambuf_iterator<char>());
 
-    auto key = generateValidKey(keyword);
     auto encryptedText = vigenere(text, key, true);
-    fout << text;
-    fout << encryptedText;
-
     auto keyLength = getKeyLength(encryptedText);
     auto keyq = getKey(keyLength, encryptedText, enLettersFreq);
-    fout << vigenere(encryptedText, keyq, false);
 
     fin.close();
+    return keyq;
+}
+
+//in{i}.txt and key{i}.txt
+void runTest(std::string inDir, std::ofstream& fout) {
+    fout << "CURRENT FOLDER IS " << inDir << std::endl;
+    int p = 0;
+    for(int i = 0; i < 10; ++i) {
+        std::ifstream fin(inDir + "key" + std::to_string(i) + ".txt");
+        std::string keyword;
+        std::getline(fin, keyword);
+        fin.close();
+
+        auto key = generateValidKey(keyword);
+        auto pKey = readFromFileAndDoSomeWork(inDir + "in" + std::to_string(i) + ".txt", key);
+
+        if (pKey == key) {
+            p++;
+            fout << "SUCCESS ";
+        } else {
+            fout << "FAILED ";
+        }
+        fout << pKey << " and " << key << std::endl;
+
+
+    }
+    fout << "SUCCESSFULLY PASSED " << p << " FROM 10" << std::endl;
+    fout << "PROBABILITY IS " << p * 1.0/10;
+    fout << std::endl << std::endl;
+}
+
+void runKeyTests() {
+    std::ofstream fout("../tests/out_key_tests.txt");
+    runTest("../tests/key_test1/", fout);
+    runTest("../tests/key_test2/", fout);
+    runTest("../tests/key_test3/", fout);
+    runTest("../tests/key_test4/", fout);
+    runTest("../tests/key_test5/", fout);
     fout.close();
+}
+
+void runTextTests() {
+    std::ofstream fout("../tests/out_text_tests.txt");
+    runTest("../tests/text_test1/", fout);
+    runTest("../tests/text_test2/", fout);
+    runTest("../tests/text_test3/", fout);
+    runTest("../tests/text_test4/", fout);
+    runTest("../tests/text_test5/", fout);
+    fout.close();
+}
+
+int main() {
+    runKeyTests();
+    //runTextTests();
     return 0;
 }
