@@ -26,7 +26,7 @@ int gcd(int a, int b) {
 int findGCD(std::vector<int> vector) {
     int result = vector.front();
     for(auto it = vector.begin() + 1; it != vector.end(); ++it) {
-       result = gcd(*it, result);
+        result = gcd(*it, result);
     }
     return result;
 }
@@ -47,6 +47,8 @@ int getKeyLength(std::string text) {
             }
         }
     }
+    if (map.empty())
+        return 0;
     std::vector<int> maxVector;
     for(auto & it : map) {
         if (maxVector.size() <= it.second.size()) {
@@ -78,6 +80,8 @@ std::pair<char, double > mostUsedLetter(std::vector<char> letters) {
 
 
 std::string getKey(int keyLength, std::string text, const std::map <char ,int>& lettersFreq) {
+    if (keyLength == 0)
+        return "";
     std::string filteredText = filterText(text);
     std::vector<std::vector<char>> tmp(keyLength);
     std::string key;

@@ -56,16 +56,16 @@ void runTest(std::string inDir, std::ofstream& fout) {
         std::getline(fin, keyword);
         fin.close();
 
-        auto key = generateValidKey(keyword);
-        auto pKey = readFromFileAndDoSomeWork(inDir + "in" + std::to_string(i) + ".txt", key);
+        //auto key = generateValidKey(keyword);
+        auto pKey = readFromFileAndDoSomeWork(inDir + "in" + std::to_string(i) + ".txt", keyword);
 
-        if (pKey == key) {
+        if (pKey == keyword) {
             p++;
             fout << "SUCCESS ";
         } else {
             fout << "FAILED ";
         }
-        fout << pKey << " and " << key << std::endl;
+        fout << pKey << " and " << keyword << std::endl;
 
 
     }
@@ -96,6 +96,6 @@ void runTextTests() {
 
 int main() {
     runKeyTests();
-    //runTextTests();
+    runTextTests();
     return 0;
 }
