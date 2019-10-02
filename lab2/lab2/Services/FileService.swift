@@ -31,8 +31,7 @@ class FileService {
         do {
             let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL,
                                                                includingPropertiesForKeys: nil)
-            let files = fileURLs.compactMap { $0.isFileURL ? $0.pathComponents.last! : .none}
-            return files.isEmpty ? .none : files
+            return fileURLs.compactMap { $0.isFileURL ? $0.pathComponents.last! : .none}
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
