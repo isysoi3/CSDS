@@ -21,7 +21,7 @@ class Backend {
         guard let files = FileService.getFiles() else {
             return .failure(.error("Проблема с получением списка файлов"))
         }
-        return .success(JSON(files))
+        return .success(JSON(files.map { $0.prefix(while: { c in c != "."})}))
     }
     
     func getFile(queryParams: [(String, String)]) -> Result<JSON, BackendErrorEnum> {
