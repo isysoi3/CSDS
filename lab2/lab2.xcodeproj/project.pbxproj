@@ -19,6 +19,7 @@
 		D3F6F76A23451BDE00377271 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76923451BDE00377271 /* Backend.swift */; };
 		D3F6F76C23451C0900377271 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76B23451C0900377271 /* Router.swift */; };
 		D3F6F76E234524CD00377271 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76D234524CD00377271 /* FileService.swift */; };
+		D3F6F77323453B3400377271 /* Array+StringTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F77223453B3400377271 /* Array+StringTuple.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D3F6F76923451BDE00377271 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		D3F6F76B23451C0900377271 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D3F6F76D234524CD00377271 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		D3F6F77223453B3400377271 /* Array+StringTuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+StringTuple.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				D3F6F7632345002000377271 /* Services */,
-				D3F6F76F234531B200377271 /* Client */,
 				D3F6F76623451A4C00377271 /* Http Server */,
+				D3F6F76F234531B200377271 /* Client */,
 			);
 			path = lab2;
 			sourceTree = "<group>";
@@ -99,6 +101,7 @@
 		D3F6F76623451A4C00377271 /* Http Server */ = {
 			isa = PBXGroup;
 			children = (
+				D3F6F77123453B1800377271 /* Extensions */,
 				D3F6F770234531BE00377271 /* Services */,
 				D3F6F76723451A5D00377271 /* Server.swift */,
 				D3F6F76B23451C0900377271 /* Router.swift */,
@@ -127,6 +130,14 @@
 				D3F6F76D234524CD00377271 /* FileService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D3F6F77123453B1800377271 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D3F6F77223453B3400377271 /* Array+StringTuple.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E1ECE59EE05C1499D44ADB9F /* Pods */ = {
@@ -259,6 +270,7 @@
 				D3F6F76C23451C0900377271 /* Router.swift in Sources */,
 				D3F6F76823451A5D00377271 /* Server.swift in Sources */,
 				D3F6F76E234524CD00377271 /* FileService.swift in Sources */,
+				D3F6F77323453B3400377271 /* Array+StringTuple.swift in Sources */,
 				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,
 			);

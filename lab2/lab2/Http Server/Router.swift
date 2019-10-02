@@ -18,7 +18,8 @@ class Router {
     
     init() {
         hanldeForPath = [ "/hello" : helloHandler,
-                          "api/v1/files" : filesHandler]
+                          "api/v1/files" : getFilesHandler,
+                          "api/v1/file" : getFileHandler]
     }
     
     private func buildResponseForResult(_ result: Result<JSON, BackendErrorEnum>) -> HttpResponse {
@@ -45,11 +46,19 @@ fileprivate extension Router {
         .ok(.htmlBody("You asked for \(request)"))
     }
     
-    func filesHandler(_ request: HttpRequest) -> HttpResponse {
+    func getFilesHandler(_ request: HttpRequest) -> HttpResponse {
         guard request.method == "GET" else {
             return HttpResponse.notFound
         }
         let result = backend.getFiles()
+        return buildResponseForResult(result)
+    }
+    
+    func getFileHandler(_ request: HttpRequest) -> HttpResponse {
+        guard request.method == "GET" else {
+            return HttpResponse.notFound
+        }
+        let result = backend.getFile(queryParams: request.queryParams)
         return buildResponseForResult(result)
     }
     

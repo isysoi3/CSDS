@@ -38,4 +38,15 @@ class FileService {
         return .none
     }
     
+    static func containsFile(name: String) -> Bool {
+        let filename = name + ".txt"
+        guard
+            let files = FileService.getFiles(),
+            !files.isEmpty,
+            let file = files.first(where: { filename == $0}) else {
+                return false
+        }
+        return true
+    }
+    
 }

@@ -24,4 +24,21 @@ class Backend {
         return .success(JSON(files))
     }
     
+    func getFile(queryParams: [(String, String)]) -> Result<JSON, BackendErrorEnum> {
+        guard let filename = queryParams.getValueForKey("name") else {
+            return .failure(.error("На задано имя файла"))
+        }
+        guard let key = queryParams.getValueForKey("key") else {
+            return .failure(.error("На задан ключ"))
+        }
+        guard FileService.containsFile(name: filename) else {
+            return .failure(.error("\(filename) не найден"))
+        }
+        guard let text = try? FileService.read(from: filename) else {
+            return .failure(.error("Не удалось прочитать файл"))
+        }
+        
+        return .success(JSON(["text" : text]))
+    }
+    
 }
