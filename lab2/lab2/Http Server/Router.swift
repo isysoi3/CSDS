@@ -8,21 +8,20 @@
 
 import Foundation
 import SwiftyJSON
+import Swifter
 
 class Router {
     
     let backend = Backend()
     
-    private var backendMethodForType: [String : ProcessRequest] = [:]
+    private(set) var hanldeForPath: [String : (HttpRequest) -> (HttpResponse)] = [:]
     
     init() {
-        
+        hanldeForPath = [ "/hello" : helloHandler]
     }
     
-    func routeWithBody(_ requestBody: String) -> String? {
-        return .none
+    private func helloHandler(_ request: HttpRequest) -> HttpResponse {
+        .ok(.htmlBody("You asked for \(request)"))
     }
-    
-    
     
 }

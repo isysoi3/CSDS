@@ -12,11 +12,7 @@ import Swifter
 class Server {
     
     private let server: HttpServer
-    let router: Router
-    
-    var backend: Backend {
-        return router.backend
-    }
+    private let router: Router
     
     var state: HttpServerIO.HttpServerIOState {
         return server.state
@@ -34,7 +30,9 @@ class Server {
         router = Router()
         server = HttpServer()
         
-        server["/hello"] = handleRequests
+        router.hanldeForPath.forEach { (path, handler) in
+            server[path] = handler
+        }
     }
     
     func start() {
@@ -48,20 +46,6 @@ class Server {
     
     func stop() {
         server.stop()
-    }
-    
-    private func handleRequests(request: HttpRequest) -> HttpResponse {
-        return .ok(.htmlBody("You asked for \(request)"))
-        /*
-         guard let body = String(bytes: request.body, encoding: .windowsCP1251) else {
-         return HttpResponse.internalServerError
-         }
-         guard let response = router.routeWithBody(body) else {
-         print("HttpResponse.notFound")
-         return HttpResponse.notFound
-         }
-         return HttpResponse.ok(.text(response))
-         */
     }
        
 }
