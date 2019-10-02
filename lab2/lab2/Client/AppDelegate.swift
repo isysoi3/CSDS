@@ -11,12 +11,23 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
 
     let server = Server()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         server.start()
+        
+        if #available(iOS 13.0, *) {
+            // no-op - UI created in scene delegate
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+            let vc = FilesListViewController.newInstance()
+            let nc = UINavigationController(rootViewController: vc)
+            self.window?.rootViewController = nc
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
 
