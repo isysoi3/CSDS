@@ -38,6 +38,12 @@ class RSAService {
         return (publicKey, privateKey)
     }
     
+    func keyToString(_ key: Key) -> String {
+        let base64_1 = key.exponent.serialize().base64String
+        let base64_2 = key.modulus.serialize().base64String
+
+        return [base64_1, base64_2].joined(separator: "\n")
+    }
 }
 
 
@@ -76,6 +82,22 @@ extension BigUInt {
     
     func endecrypt(RSAKey key: RSAService.Key) -> BigUInt {
         return self.power(key.exponent, modulus: key.modulus)
+    }
+    
+}
+
+extension Data {
+    
+    var base64String: String {
+        return self.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+    }
+    
+}
+
+extension String {
+    
+    var base64Data: Data? {
+        return Data(base64Encoded: self)
     }
     
 }
