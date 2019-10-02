@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		D3F6F7572345000F00377271 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F7552345000F00377271 /* Main.storyboard */; };
 		D3F6F7592345001000377271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F7582345001000377271 /* Assets.xcassets */; };
 		D3F6F75C2345001000377271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F75A2345001000377271 /* LaunchScreen.storyboard */; };
+		D3F6F7652345024A00377271 /* RSAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F7642345024A00377271 /* RSAService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D3F6F7582345001000377271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3F6F75B2345001000377271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3F6F75D2345001000377271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3F6F7642345024A00377271 /* RSAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,7 @@
 		D3F6F74E2345000F00377271 /* lab2 */ = {
 			isa = PBXGroup;
 			children = (
-				D3F6F7632345002000377271 /* Service */,
+				D3F6F7632345002000377271 /* Services */,
 				D3F6F74F2345000F00377271 /* AppDelegate.swift */,
 				D3F6F7512345000F00377271 /* SceneDelegate.swift */,
 				D3F6F7532345000F00377271 /* ViewController.swift */,
@@ -83,11 +85,12 @@
 			path = lab2;
 			sourceTree = "<group>";
 		};
-		D3F6F7632345002000377271 /* Service */ = {
+		D3F6F7632345002000377271 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D3F6F7642345024A00377271 /* RSAService.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		E1ECE59EE05C1499D44ADB9F /* Pods */ = {
@@ -96,7 +99,6 @@
 				3B3A051DF2430454A5A739D5 /* Pods-lab2.debug.xcconfig */,
 				A81E0189EA8ACBA0725561FF /* Pods-lab2.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -217,6 +219,7 @@
 			files = (
 				D3F6F7542345000F00377271 /* ViewController.swift in Sources */,
 				D3F6F7502345000F00377271 /* AppDelegate.swift in Sources */,
+				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
