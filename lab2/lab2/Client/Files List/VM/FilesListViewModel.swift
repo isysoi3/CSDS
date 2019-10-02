@@ -15,8 +15,21 @@ class FilesListViewModel {
     @Published var serverError: String? = nil
     
     func getFiles() {
-        files.append(FileModel(name: "123"))
-        files.append(FileModel(name: "321"))
-        files.append(FileModel(name: "21321"))
+        FilesRepository.shared.getFiles { [weak self] result in
+            guard let `self` = self else { return }
+            switch result {
+            case .success(let items):
+                self.files.append(contentsOf: items)
+            case .failure(let error):
+                switch error {
+                case .server(let message):
+                    self.serverError = message
+                case .parsing:
+                    self.serverError = "Какая то ошибка"
+                @unknown default:
+                    break
+                }
+            }
+        }
     }
 }
