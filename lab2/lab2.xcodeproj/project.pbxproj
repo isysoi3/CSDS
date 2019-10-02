@@ -15,6 +15,10 @@
 		D3F6F7592345001000377271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F7582345001000377271 /* Assets.xcassets */; };
 		D3F6F75C2345001000377271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F75A2345001000377271 /* LaunchScreen.storyboard */; };
 		D3F6F7652345024A00377271 /* RSAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F7642345024A00377271 /* RSAService.swift */; };
+		D3F6F76823451A5D00377271 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76723451A5D00377271 /* Server.swift */; };
+		D3F6F76A23451BDE00377271 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76923451BDE00377271 /* Backend.swift */; };
+		D3F6F76C23451C0900377271 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76B23451C0900377271 /* Router.swift */; };
+		D3F6F76E234524CD00377271 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F76D234524CD00377271 /* FileService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		D3F6F75B2345001000377271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3F6F75D2345001000377271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3F6F7642345024A00377271 /* RSAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAService.swift; sourceTree = "<group>"; };
+		D3F6F76723451A5D00377271 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		D3F6F76923451BDE00377271 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
+		D3F6F76B23451C0900377271 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		D3F6F76D234524CD00377271 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +81,7 @@
 		D3F6F74E2345000F00377271 /* lab2 */ = {
 			isa = PBXGroup;
 			children = (
+				D3F6F76623451A4C00377271 /* Http Server */,
 				D3F6F7632345002000377271 /* Services */,
 				D3F6F74F2345000F00377271 /* AppDelegate.swift */,
 				D3F6F7512345000F00377271 /* SceneDelegate.swift */,
@@ -89,8 +98,19 @@
 			isa = PBXGroup;
 			children = (
 				D3F6F7642345024A00377271 /* RSAService.swift */,
+				D3F6F76D234524CD00377271 /* FileService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D3F6F76623451A4C00377271 /* Http Server */ = {
+			isa = PBXGroup;
+			children = (
+				D3F6F76723451A5D00377271 /* Server.swift */,
+				D3F6F76B23451C0900377271 /* Router.swift */,
+				D3F6F76923451BDE00377271 /* Backend.swift */,
+			);
+			path = "Http Server";
 			sourceTree = "<group>";
 		};
 		E1ECE59EE05C1499D44ADB9F /* Pods */ = {
@@ -219,6 +239,10 @@
 			files = (
 				D3F6F7542345000F00377271 /* ViewController.swift in Sources */,
 				D3F6F7502345000F00377271 /* AppDelegate.swift in Sources */,
+				D3F6F76A23451BDE00377271 /* Backend.swift in Sources */,
+				D3F6F76C23451C0900377271 /* Router.swift in Sources */,
+				D3F6F76823451A5D00377271 /* Server.swift in Sources */,
+				D3F6F76E234524CD00377271 /* FileService.swift in Sources */,
 				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,
 			);

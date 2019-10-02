@@ -4,4 +4,5 @@ target 'lab2' do
   use_frameworks!
   pod 'Swifter'
   pod 'BigInt'
+  pod 'SwiftyJSON'
 end
