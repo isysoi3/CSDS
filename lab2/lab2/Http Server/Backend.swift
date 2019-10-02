@@ -17,5 +17,11 @@ typealias ProcessRequest = (JSON) -> Result<JSON, BackendErrorEnum>
 
 class Backend {
     
+    func getFiles() -> Result<JSON, BackendErrorEnum> {
+        guard let files = FileService.getFiles() else {
+            return .failure(.error("Проблема с получением списка файлов"))
+        }
+        return .success(JSON(files))
+    }
     
 }
