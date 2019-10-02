@@ -12,6 +12,8 @@
 		D3BE77C423453F9000266EFD /* SectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77C123453F9000266EFD /* SectionAdapter.swift */; };
 		D3BE77C523453F9000266EFD /* TableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77C223453F9000266EFD /* TableAdapter.swift */; };
 		D3BE77C723453FB300266EFD /* UITableView+TableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77C623453FB300266EFD /* UITableView+TableAdapter.swift */; };
+		D3BE77CB234541C300266EFD /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77CA234541C300266EFD /* FileModel.swift */; };
+		D3BE77CE234542E800266EFD /* FilesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77CD234542E800266EFD /* FilesListViewModel.swift */; };
 		D3F6F7502345000F00377271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F74F2345000F00377271 /* AppDelegate.swift */; };
 		D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F7512345000F00377271 /* SceneDelegate.swift */; };
 		D3F6F7592345001000377271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F7582345001000377271 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		D3BE77C123453F9000266EFD /* SectionAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionAdapter.swift; sourceTree = "<group>"; };
 		D3BE77C223453F9000266EFD /* TableAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableAdapter.swift; sourceTree = "<group>"; };
 		D3BE77C623453FB300266EFD /* UITableView+TableAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableAdapter.swift"; sourceTree = "<group>"; };
+		D3BE77CA234541C300266EFD /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
+		D3BE77CD234542E800266EFD /* FilesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesListViewModel.swift; sourceTree = "<group>"; };
 		D3F6F74C2345000F00377271 /* lab2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lab2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F6F74F2345000F00377271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3F6F7512345000F00377271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,31 @@
 				D3BE77C223453F9000266EFD /* TableAdapter.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		D3BE77C82345417500266EFD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D3F6F77423453C0300377271 /* FilesListViewController.swift */,
+				D3F6F77523453C0300377271 /* FilesListViewController.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D3BE77C9234541B700266EFD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3BE77CA234541C300266EFD /* FileModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D3BE77CC234542D000266EFD /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				D3BE77CD234542E800266EFD /* FilesListViewModel.swift */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		D3F6F7432345000E00377271 = {
@@ -132,6 +161,7 @@
 		D3F6F76F234531B200377271 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				D3BE77C9234541B700266EFD /* Models */,
 				D3BE77BF23453E6600266EFD /* Common */,
 				D3F6F77823453C5900377271 /* Files List */,
 				D3F6F74F2345000F00377271 /* AppDelegate.swift */,
@@ -162,8 +192,8 @@
 		D3F6F77823453C5900377271 /* Files List */ = {
 			isa = PBXGroup;
 			children = (
-				D3F6F77423453C0300377271 /* FilesListViewController.swift */,
-				D3F6F77523453C0300377271 /* FilesListViewController.xib */,
+				D3BE77C82345417500266EFD /* UI */,
+				D3BE77CC234542D000266EFD /* VM */,
 			);
 			path = "Files List";
 			sourceTree = "<group>";
@@ -295,12 +325,14 @@
 				D3F6F7502345000F00377271 /* AppDelegate.swift in Sources */,
 				D3F6F77623453C0300377271 /* FilesListViewController.swift in Sources */,
 				D3BE77C523453F9000266EFD /* TableAdapter.swift in Sources */,
+				D3BE77CE234542E800266EFD /* FilesListViewModel.swift in Sources */,
 				D3F6F76A23451BDE00377271 /* Backend.swift in Sources */,
 				D3F6F76C23451C0900377271 /* Router.swift in Sources */,
 				D3F6F76823451A5D00377271 /* Server.swift in Sources */,
 				D3F6F76E234524CD00377271 /* FileService.swift in Sources */,
 				D3BE77C423453F9000266EFD /* SectionAdapter.swift in Sources */,
 				D3BE77C723453FB300266EFD /* UITableView+TableAdapter.swift in Sources */,
+				D3BE77CB234541C300266EFD /* FileModel.swift in Sources */,
 				D3F6F77323453B3400377271 /* Array+StringTuple.swift in Sources */,
 				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,

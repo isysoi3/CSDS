@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import Combine
 
 class FilesListViewController: UIViewController {
 
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
-    private var filesSection: GenericSectionAdapter<String, StringCell>!
+    private var filesSection: GenericSectionAdapter<FileModel, StringCell>!
     private var tableViewAdapter: TableAdapter!
     
-    var files: [String] = ["sas"] {
+    private var filesSubscriber: AnyCancellable?
+    private var viewModel = FilesListViewModel()
+    
+    var files: [FileModel] = [FileModel(name: "test")] {
         didSet {
             filesSection.items = files
             tableView.reloadData()
@@ -28,16 +32,32 @@ class FilesListViewController: UIViewController {
                                        bundle: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.getFiles()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filesSection = GenericSectionAdapter<String, StringCell>(items: files,
-                                                                 identifier: "StringCell")
+        initUI()
+        initVM()
+    }
+
+    func initUI() {
+        filesSection = GenericSectionAdapter<FileModel, StringCell>(items: files,
+                                                                    identifier: "StringCell")
         tableViewAdapter = TableAdapter(section: filesSection)
         tableView.setAdapter(tableViewAdapter)
         tableView.reloadData()
     }
-
+    
+    func initVM() {
+        filesSubscriber = viewModel.$files.receive(on: DispatchQueue.main).assign(to: \.files,
+                                                                                  on: self)
+    }
+    
 }
 
 class StringCell: UITableViewCell, Adaptable {
@@ -50,8 +70,8 @@ class StringCell: UITableViewCell, Adaptable {
         super.init(coder: coder)
     }
     
-    func updateWithModel(_ model: String) {
-        textLabel?.text = model
+    func updateWithModel(_ model: FileModel) {
+        textLabel?.text = model.name
     }
     
 }
