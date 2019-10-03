@@ -18,10 +18,6 @@ class FilesListViewController: UIViewController {
     private var filesSection: GenericSectionAdapter<FileModel, StringCell>!
     private var tableViewAdapter: TableAdapter!
     
-    private var filesSubscriber: AnyCancellable?
-    private var fileSubscriber: AnyCancellable?
-    private var errorSubscriber: AnyCancellable?
-    private var networkSubscriber: AnyCancellable?
     private var viewModel = FilesListViewModel()
     
     var files: [FileModel] = [FileModel(name: "test")] {
@@ -69,11 +65,11 @@ class FilesListViewController: UIViewController {
     }
     
     func initVM() {
-        filesSubscriber = viewModel.$files
+        _  = viewModel.$files
             .receive(on: DispatchQueue.main)
             .assign(to: \.files, on: self)
         
-        errorSubscriber = viewModel.$error
+        _  = viewModel.$error
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] error in
                 if let error = error {
@@ -83,7 +79,7 @@ class FilesListViewController: UIViewController {
                 }
             })
         
-        fileSubscriber = viewModel.$selectedFile
+        _  = viewModel.$selectedFile
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] selectedFile in
                 if let file = selectedFile {
@@ -92,7 +88,7 @@ class FilesListViewController: UIViewController {
                 }
             })
         
-        networkSubscriber = viewModel.$isLoading
+        _  = viewModel.$isLoading
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] isLoading in
                 guard let `self` = self else { return }
@@ -110,7 +106,7 @@ class FilesListViewController: UIViewController {
                 }
             })
         
-        viewModel.$message
+        _  = viewModel.$message
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] message in
                 if let message = message {
