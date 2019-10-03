@@ -14,13 +14,16 @@ class FilesListViewModel {
     @Published var files: [FileModel] = []
     @Published var error: String? = nil
     @Published var selectedFile: FileModel? = nil
+    @Published var isLoading: Bool = false
     
     func getFiles() {
+        isLoading = true
         FilesRepository.shared.getFiles { [weak self] result in
             guard let `self` = self else { return }
+            self.isLoading = false
             switch result {
             case .success(let items):
-                self.files.append(contentsOf: items)
+                self.files = items
             case .failure(let error):
                 switch error {
                 case .server(let message):
@@ -35,8 +38,10 @@ class FilesListViewModel {
     }
     
     func getFile(name: String) {
+        isLoading = true
         FilesRepository.shared.getFile(name: name) { [weak self] result in
             guard let `self` = self else { return }
+            self.isLoading = false
             switch result {
             case .success(let item):
                 self.selectedFile = item

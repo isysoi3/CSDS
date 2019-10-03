@@ -13,6 +13,7 @@ class FilesListViewController: UIViewController {
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
+    private var activityIndicator: UIActivityIndicatorView?
     
     private var filesSection: GenericSectionAdapter<FileModel, StringCell>!
     private var tableViewAdapter: TableAdapter!
@@ -20,6 +21,7 @@ class FilesListViewController: UIViewController {
     private var filesSubscriber: AnyCancellable?
     private var fileSubscriber: AnyCancellable?
     private var errorSubscriber: AnyCancellable?
+    private var networkSubscriber: AnyCancellable?
     private var viewModel = FilesListViewModel()
     
     var files: [FileModel] = [FileModel(name: "test")] {
@@ -34,17 +36,12 @@ class FilesListViewController: UIViewController {
                                        bundle: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.getFiles()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initUI()
         initVM()
+        viewModel.getFiles()
     }
     
     func initUI() {
@@ -81,6 +78,24 @@ class FilesListViewController: UIViewController {
                 if let file = selectedFile {
                     let vc = FileDetailsViewController.newInstance(withFile: file)
                     self?.present(vc, animated: true)
+                }
+            })
+        
+        networkSubscriber = viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isLoading in
+                guard let `self` = self else { return }
+                if isLoading {
+                    self.activityIndicator = UIActivityIndicatorView(style: .medium)
+                    self.activityIndicator!.frame = CGRect(x: self.view.center.x - 23,
+                                                           y: self.view.center.y - 123,
+                                                           width: 46,
+                                                           height: 46)
+                    self.activityIndicator!.startAnimating()
+                    self.tableView.addSubview(self.activityIndicator!)
+                } else {
+                    self.activityIndicator?.stopAnimating()
+                    self.activityIndicator?.removeFromSuperview()
                 }
             })
     }
