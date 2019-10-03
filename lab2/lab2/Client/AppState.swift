@@ -12,8 +12,15 @@ class AppState {
     
     static let shared = AppState()
     
-    private let rsa = RSAService()
+    let rsa = RSAService()
     private(set) var keys: RSAService.Keys?
+    
+    var publicKey: (RSAService.KeyString)? {
+        if let keys = keys {
+            return rsa.keyToString(keys.public)
+        }
+        return .none
+    }
     
     private init() {
         

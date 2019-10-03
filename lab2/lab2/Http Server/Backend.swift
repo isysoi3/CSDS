@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import BigInt
 
 enum BackendErrorEnum: Error {
     case error(String)
@@ -28,7 +29,9 @@ class Backend {
         guard let filename = queryParams.getValueForKey("name") else {
             return .failure(.error("На задано имя файла"))
         }
-        guard let key = queryParams.getValueForKey("key") else {
+        guard
+            let e = queryParams.getValueForKey("keyE"),
+            let m = queryParams.getValueForKey("keyM")else {
             return .failure(.error("На задан ключ"))
         }
         guard FileService.containsFile(name: filename) else {
@@ -38,7 +41,11 @@ class Backend {
             return .failure(.error("Не удалось прочитать файл"))
         }
         
-        return .success(JSON(["text" : text]))
+        let encodedText: String! = AppState.shared.rsa.encode(
+            text: text,
+            publicKey: RSAService.Key(exponent: BigUInt(e.base64Data!),
+                                      modulus: BigUInt(m.base64Data!)))
+        return .success(JSON(["text" : encodedText]))
     }
     
 }

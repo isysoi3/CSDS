@@ -52,9 +52,9 @@ class FilesRepository {
     }
     
     func getFile(name: String,
-                 key: String = "",
+                 key: RSAService.KeyString,
                  completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
-        let params = ["name" : name, "key" : key]
+        let params = ["name" : name, "keyE" : key.exponent, "keyM" : key.modulus]
         Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: params)
             .responseJSON { [weak self] response in
                 switch response.result {
@@ -63,10 +63,12 @@ class FilesRepository {
                     if let error = self?.parseErrors(json: json) {
                         completionBlock(.failure(.server(error)))
                     }
-                    guard let text = json["text"].string else {
+                    guard let encodedText = json["text"].string else {
                         completionBlock(.failure(.parsing))
                         return
                     }
+                    let text: String = AppState.shared.rsa.decode(text: encodedText,
+                                                                privateKey: AppState.shared.keys!.private)
                     completionBlock(.success(FileModel(name: name, text: text)))
                 case .failure:
                     completionBlock(.failure(.parsing))

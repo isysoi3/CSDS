@@ -12,6 +12,7 @@ import BigInt
 class RSAService {
     
     typealias Key = (exponent: BigUInt, modulus: BigUInt)
+    typealias KeyString = (exponent: String, modulus: String)
     typealias Keys = (`public`: Key, `private`: Key)
     
     private let e = BigUInt(65537)
@@ -38,20 +39,22 @@ class RSAService {
         return (publicKey, privateKey)
     }
     
-    func keyToString(_ key: Key) -> String {
-        let base64_1 = key.exponent.serialize().base64String
-        let base64_2 = key.modulus.serialize().base64String
-
-        return [base64_1, base64_2].joined(separator: "\n")
+    func keyToString(_ key: Key) -> KeyString {
+        (key.exponent.serialize().base64String, key.modulus.serialize().base64String)
     }
 }
 
 
-// MARK: - encode and decode
+// MARK: - encoding
 extension RSAService {
     
+    func encode(text: String, publicKey key: Key) -> String? {
+        let result: BigUInt = encode(text: text, publicKey: key)
+        return result.serialize().base64String
+    }
+    
     func encode(text: String, publicKey key: Key) -> BigUInt {
-        guard let data = text.data(using: .utf8) else {
+        guard let data = text.data(using: .ascii) else {
             fatalError("Error: Couldn't convert to data. \(text)")
         }
         
@@ -62,10 +65,20 @@ extension RSAService {
         text.map { encode(text: String($0), publicKey: key) }
     }
     
+}
+
+
+// MARK: - decoding
+extension RSAService {
+
+    func decode(text: String, privateKey key: Key) -> String {
+        decode(decryptedData: BigUInt(text.base64Data!), privateKey: key)
+    }
+    
     func decode(decryptedData: BigUInt, privateKey key: Key) -> String {
         let decryptedData = decryptedData.endecrypt(RSAKey: key)
-        if let text = String(data: decryptedData.serialize(), encoding: .utf8) {
-             return text
+        if let text = String(data: decryptedData.serialize(), encoding: .ascii) {
+            return text
         }
         fatalError("Error: Couldn't convert to text. \(decryptedData.serialize())")
     }
@@ -75,7 +88,6 @@ extension RSAService {
     }
     
 }
-
 
 // MARK: - extension BigUInt endecrypt
 extension BigUInt {

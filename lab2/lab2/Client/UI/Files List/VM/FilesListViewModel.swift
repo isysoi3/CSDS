@@ -44,8 +44,13 @@ class FilesListViewModel {
     }
     
     func getFile(name: String) {
+        guard let key = AppState.shared.publicKey else {
+            error = "Сгенерируйте ключ"
+            return
+        }
+        
         isLoading = true
-        FilesRepository.shared.getFile(name: name) { [weak self] result in
+        FilesRepository.shared.getFile(name: name, key: key) { [weak self] result in
             guard let `self` = self else { return }
             self.isLoading = false
             switch result {
