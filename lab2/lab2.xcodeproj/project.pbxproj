@@ -165,19 +165,11 @@
 		D3F6F74E2345000F00377271 /* lab2 */ = {
 			isa = PBXGroup;
 			children = (
-				D3F6F7632345002000377271 /* Services */,
+				D3F6F7642345024A00377271 /* RSAService.swift */,
 				D3F6F76623451A4C00377271 /* Http Server */,
 				D3F6F76F234531B200377271 /* Client */,
 			);
 			path = lab2;
-			sourceTree = "<group>";
-		};
-		D3F6F7632345002000377271 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				D3F6F7642345024A00377271 /* RSAService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		D3F6F76623451A4C00377271 /* Http Server */ = {
