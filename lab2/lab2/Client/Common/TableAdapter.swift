@@ -44,6 +44,7 @@ class TableAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.isSelected = false
         sections[indexPath.section].selected(atIndex: indexPath.item)
     }
 }

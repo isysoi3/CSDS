@@ -17,11 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let winScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: winScene)
-
-        let vc = FilesListViewController.newInstance()
-        let nc = UINavigationController(rootViewController: vc)
-        self.window?.rootViewController = nc
-        self.window?.makeKeyAndVisible()
+        showFilesListViewControllerOn(window: window!)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -19,15 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         server.start()
         
-        if #available(iOS 13.0, *) {
-            // no-op - UI created in scene delegate
-        } else {
-            window = UIWindow(frame: UIScreen.main.bounds)
-            let vc = FilesListViewController.newInstance()
-            let nc = UINavigationController(rootViewController: vc)
-            self.window?.rootViewController = nc
-            self.window?.makeKeyAndVisible()
-        }
+        window = UIWindow(frame: UIScreen.main.bounds)
+        showFilesListViewControllerOn(window: window!)
         return true
     }
 
@@ -48,3 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+func showFilesListViewControllerOn(window: UIWindow) {
+    let vc = FilesListViewController.newInstance()
+    let nc = UINavigationController(rootViewController: vc)
+    window.rootViewController = nc
+    window.makeKeyAndVisible()
+}

@@ -25,10 +25,13 @@ class FilesRepository {
     
     func getFiles(completionBlock: @escaping (Swift.Result<[FileModel], FileRepositoryErrorEnum>) -> ()) {
         Alamofire.request("http://127.0.0.1:8181/api/v1/files", method: .get)
-            .responseJSON { response in
+            .responseJSON { [weak self] response in
                 switch response.result {
                 case .success(let json):
                     let json = JSON(json)
+                    if let error = self?.parseErrors(json: json) {
+                        completionBlock(.failure(.server(error)))
+                    }
                     guard  let array = json.array else {
                         completionBlock(.failure(.parsing))
                         return
@@ -46,6 +49,32 @@ class FilesRepository {
                     completionBlock(.failure(.parsing))
                 }
         }
+    }
+    
+    func getFile(name: String,
+                 completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
+        let params = ["name" : name]
+        Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: params)
+            .responseJSON { [weak self] response in
+                switch response.result {
+                case .success(let json):
+                    let json = JSON(json)
+                    if let error = self?.parseErrors(json: json) {
+                        completionBlock(.failure(.server(error)))
+                    }
+                    guard let text = json["text"].string else {
+                        completionBlock(.failure(.parsing))
+                        return
+                    }
+                    completionBlock(.success(FileModel(name: name, text: text)))
+                case .failure:
+                    completionBlock(.failure(.parsing))
+                }
+        }
+    }
+    
+    private func parseErrors(json: JSON) -> String? {
+        return json["error"].string
     }
     
 }

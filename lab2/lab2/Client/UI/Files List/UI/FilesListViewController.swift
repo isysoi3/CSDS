@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 class FilesListViewController: UIViewController {
-
+    
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,6 +18,8 @@ class FilesListViewController: UIViewController {
     private var tableViewAdapter: TableAdapter!
     
     private var filesSubscriber: AnyCancellable?
+    private var fileSubscriber: AnyCancellable?
+    private var errorSubscriber: AnyCancellable?
     private var viewModel = FilesListViewModel()
     
     var files: [FileModel] = [FileModel(name: "test")] {
@@ -44,18 +46,43 @@ class FilesListViewController: UIViewController {
         initUI()
         initVM()
     }
-
+    
     func initUI() {
         filesSection = GenericSectionAdapter<FileModel, StringCell>(items: files,
                                                                     identifier: "StringCell")
+        filesSection.onSelected = { [weak self] file in
+            self?.viewModel.getFile(name: file.name)
+        }
         tableViewAdapter = TableAdapter(section: filesSection)
         tableView.setAdapter(tableViewAdapter)
         tableView.reloadData()
+        
+        title = "RSA Notes"
     }
     
     func initVM() {
-        filesSubscriber = viewModel.$files.receive(on: DispatchQueue.main).assign(to: \.files,
-                                                                                  on: self)
+        filesSubscriber = viewModel.$files
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.files, on: self)
+        
+        errorSubscriber = viewModel.$error
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] error in
+                if let error = error {
+                    let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо", style: .default))
+                    self?.present(alert, animated: true)
+                }
+            })
+        
+        fileSubscriber = viewModel.$selectedFile
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] selectedFile in
+                if let file = selectedFile {
+                    let vc = FileDetailsViewController.newInstance(withFile: file)
+                    self?.present(vc, animated: true)
+                }
+            })
     }
     
 }
@@ -64,10 +91,16 @@ class StringCell: UITableViewCell, Adaptable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureView()
+    }
+    
+    private func configureView() {
+        accessoryType = .disclosureIndicator
     }
     
     func updateWithModel(_ model: FileModel) {
