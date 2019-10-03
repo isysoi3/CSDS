@@ -82,7 +82,7 @@ class FilesListViewController: UIViewController {
             .sink(receiveValue: { [weak self] selectedFile in
                 if let file = selectedFile {
                     let vc = FileDetailsViewController.newInstance(withFile: file)
-                    self?.present(vc, animated: true)
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }
             })
         

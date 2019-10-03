@@ -52,8 +52,9 @@ class FilesRepository {
     }
     
     func getFile(name: String,
+                 key: String = "",
                  completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
-        let params = ["name" : name]
+        let params = ["name" : name, "key" : key]
         Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: params)
             .responseJSON { [weak self] response in
                 switch response.result {
