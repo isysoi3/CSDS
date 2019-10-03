@@ -59,6 +59,12 @@ class FilesListViewController: UIViewController {
             target: viewModel,
             action: #selector(viewModel.getFiles))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "key"),
+            style: .plain,
+            target: viewModel,
+            action: #selector(viewModel.generateKeys))
+        
         title = "RSA Notes"
     }
     
@@ -101,6 +107,16 @@ class FilesListViewController: UIViewController {
                 } else {
                     self.activityIndicator?.stopAnimating()
                     self.activityIndicator?.removeFromSuperview()
+                }
+            })
+        
+        viewModel.$message
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] message in
+                if let message = message {
+                    let alert = UIAlertController(title: "Сообщение", message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо", style: .default))
+                    self?.present(alert, animated: true)
                 }
             })
     }

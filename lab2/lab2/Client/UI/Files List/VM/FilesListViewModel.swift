@@ -13,8 +13,14 @@ class FilesListViewModel {
     
     @Published var files: [FileModel] = []
     @Published var error: String? = nil
+    @Published var message: String? = nil
     @Published var selectedFile: FileModel? = nil
     @Published var isLoading: Bool = false
+
+    @objc func generateKeys() {
+        AppState.shared.generateKeys()
+        message = "Ключи сгенерирован"
+    }
     
     @objc func getFiles() {
         isLoading = true
