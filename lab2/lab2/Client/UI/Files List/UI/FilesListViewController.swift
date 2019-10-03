@@ -54,6 +54,11 @@ class FilesListViewController: UIViewController {
         tableView.setAdapter(tableViewAdapter)
         tableView.reloadData()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .refresh,
+            target: viewModel,
+            action: #selector(viewModel.getFiles))
+        
         title = "RSA Notes"
     }
     

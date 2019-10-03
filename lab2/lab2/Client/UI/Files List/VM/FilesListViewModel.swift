@@ -16,7 +16,7 @@ class FilesListViewModel {
     @Published var selectedFile: FileModel? = nil
     @Published var isLoading: Bool = false
     
-    func getFiles() {
+    @objc func getFiles() {
         isLoading = true
         FilesRepository.shared.getFiles { [weak self] result in
             guard let `self` = self else { return }
