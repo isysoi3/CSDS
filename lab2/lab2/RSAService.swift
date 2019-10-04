@@ -57,10 +57,6 @@ class RSAService {
 // MARK: - encoding
 extension RSAService {
     
-//    func encode(text: String, publicKey key: Key) -> String {
-//        String(data: encode(text: text, publicKey: key).serialize(), encoding: .utf8)!
-//    }
-    
     func encode(text: String, publicKey key: Key) -> BigUInt {
         guard let data = text.data(using: .utf8) else {
             fatalError("Error: Couldn't convert to data. \(text)")
@@ -74,11 +70,6 @@ extension RSAService {
 
 // MARK: - decoding
 extension RSAService {
-
-//    func decode(text: String, privateKey key: Key) -> String {
-//        decode(decryptedData: BigUInt(text.data(using: .utf8)!), privateKey: key)
-//    }
-//
     
     func decode(decryptedData: BigUInt, privateKey key: Key) -> String {
         let tmp = decryptedData.endecrypt(RSAKey: key)

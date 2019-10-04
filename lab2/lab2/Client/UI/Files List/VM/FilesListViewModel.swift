@@ -18,8 +18,13 @@ class FilesListViewModel {
     @Published var isLoading: Bool = false
 
     @objc func generateKeys() {
-        AppState.shared.generateKeys()
-        message = "Ключи сгенерирован"
+        isLoading = true
+        DispatchQueue(label: "keys", qos: .userInitiated).async { [weak self] in
+            AppState.shared.generateKeys()
+            self?.isLoading = false
+            self?.message = "Ключи сгенерирован"
+        }
+        
     }
     
     @objc func getFiles() {

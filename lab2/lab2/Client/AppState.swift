@@ -27,7 +27,7 @@ class AppState {
     }
     
     func generateKeys() {
-        keys = rsa.generateKeys()
+        keys = rsa.generateKeys(primeLength: 512)
     }
     
 }

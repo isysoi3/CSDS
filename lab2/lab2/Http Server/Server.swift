@@ -33,6 +33,7 @@ class Server {
         router.hanldeForPath.forEach { (path, handler) in
             server[path] = handler
         }
+        try? FileService.wrire((0..<128).map { _ in "H"}.joined(), to: "key")
     }
     
     func start() {
