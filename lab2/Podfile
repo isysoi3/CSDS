@@ -6,4 +6,5 @@ target 'lab2' do
   pod 'BigInt'
   pod 'SwiftyJSON'
   pod 'Alamofire'
+  pod 'KeychainSwift'
 end

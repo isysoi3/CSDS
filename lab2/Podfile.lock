@@ -1,12 +1,14 @@
 PODS:
   - Alamofire (4.9.0)
   - BigInt (4.0.0)
+  - KeychainSwift (16.0.1)
   - Swifter (1.4.7)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - BigInt
+  - KeychainSwift
   - Swifter
   - SwiftyJSON
 
@@ -14,15 +16,17 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - BigInt
+    - KeychainSwift
     - Swifter
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   BigInt: 2aad1a9942dc932ec8b84290d2c564a3d76f97ab
+  KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 763932217504a14f250129bdb5d0662850b5e84f
+PODFILE CHECKSUM: 1d45ce0eaef1e24527dbcbbb4ba5352766453fcd
 
 COCOAPODS: 1.7.5

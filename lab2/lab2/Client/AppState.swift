@@ -8,10 +8,12 @@
 
 import Foundation
 import BigInt
+import KeychainSwift
 
 class AppState {
     
     static let shared = AppState()
+    private let keychain = KeychainSwift()
     
     let rsa = RSAService()
     private(set) var keys: RSAService.Keys?
@@ -29,14 +31,13 @@ class AppState {
     }
     
     private init() {
-        if let prE = UserDefaults.standard.data(forKey: "RSAPrivatExponent"),
-            let prM = UserDefaults.standard.data(forKey: "RSAPrivatModulus"),
-            let pE = UserDefaults.standard.data(forKey: "RSAPublicExponent"),
-            let pM = UserDefaults.standard.data(forKey: "RSAPublicModulus") {
+        if let prE = keychain.getData("RSAPrivatExponent"),
+            let prM = keychain.getData("RSAPrivatModulus"),
+            let pE = keychain.getData("RSAPublicExponent"),
+            let pM = keychain.getData("RSAPublicModulus") {
             keys = (public: (BigUInt(pE), BigUInt(pM)),
                     private: (BigUInt(prE), BigUInt(prM)))
         }
-                        
     }
     
     func generateKeys() {
@@ -45,14 +46,14 @@ class AppState {
     }
     
     private func saveKeysToStorage() {
-        UserDefaults.standard.set(keys!.private.exponent.serialize(),
-                                  forKey: "RSAPrivatExponent")
-        UserDefaults.standard.set(keys!.private.modulus.serialize(),
-                                  forKey: "RSAPrivatModulus")
-        UserDefaults.standard.set(keys!.public.exponent.serialize(),
-                                  forKey: "RSAPublicExponent")
-        UserDefaults.standard.set(keys!.public.modulus.serialize(),
-                                  forKey: "RSAPublicModulus")
+        keychain.set(keys!.private.exponent.serialize(),
+                     forKey: "RSAPrivatExponent")
+        keychain.set(keys!.private.modulus.serialize(),
+                     forKey: "RSAPrivatModulus")
+        keychain.set(keys!.public.exponent.serialize(),
+                     forKey: "RSAPublicExponent")
+        keychain.set(keys!.public.modulus.serialize(),
+                     forKey: "RSAPublicModulus")
     }
     
 }
