@@ -76,7 +76,6 @@ class Backend {
             text: randomSting,
             publicKey: RSAService.Key(exponent: exponent,
                                       modulus: modulus))
-        let token = Int.random(in: 0 ..< 12451123)
         currentSessions[login] = randomSting
         return .success(JSON(["key" : Array(encodedText.serialize()),
                               "token" : login]))
