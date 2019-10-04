@@ -110,9 +110,7 @@ class FilesListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] message in
                 if let message = message {
-                    let alert = UIAlertController(title: "Сообщение", message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Хорошо", style: .default))
-                    self?.present(alert, animated: true)
+                    self?.showAlert(title: "Ошибка", message: message)
                 }
             })
     }

@@ -19,7 +19,8 @@ class Router {
     init() {
         hanldeForPath = [ "/hello" : helloHandler,
                           "api/v1/files" : getFilesHandler,
-                          "api/v1/file" : getFileHandler]
+                          "api/v1/file" : getFileHandler,
+                          "api/v1/login" : loginHandler]
     }
     
     private func buildResponseForResult(_ result: Result<JSON, BackendErrorEnum>) -> HttpResponse {
@@ -62,4 +63,19 @@ fileprivate extension Router {
         return buildResponseForResult(result)
     }
     
+    
+    func loginHandler(_ request: HttpRequest) -> HttpResponse {
+        guard request.method == "POST" else {
+            return HttpResponse.notFound
+        }
+        let params = String(data: Data(request.body), encoding: .utf8)?
+            .split(separator: "&")
+            .reduce(into: [String : String]()) {
+                let tmp = $1.split(separator: "=")
+                $0.updateValue(String(tmp[1]), forKey: String(tmp[0]))
+        }
+        
+        let result = backend.checkUser(params: params!)
+        return buildResponseForResult(result)
+    }
 }

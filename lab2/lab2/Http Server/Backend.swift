@@ -18,21 +18,26 @@ typealias ProcessRequest = (JSON) -> Result<JSON, BackendErrorEnum>
 
 class Backend {
     
-    func getFiles() -> Result<JSON, BackendErrorEnum> {
+    private let validUsers = ["test" : "123"]
+    private var currentSessions: [String : String] = [:]
+    
+    
+    typealias ReturnType = Result<JSON, BackendErrorEnum>
+    
+    func getFiles() -> ReturnType {
         guard let files = FileService.getFiles() else {
             return .failure(.error("Проблема с получением списка файлов"))
         }
         return .success(JSON(files.map { $0.prefix(while: { c in c != "."})}))
     }
     
-    func getFile(queryParams: [(String, String)]) -> Result<JSON, BackendErrorEnum> {
+    func getFile(queryParams: [(String, String)]) -> ReturnType {
+        guard let token = queryParams.getValueForKey("token"),
+            let key = currentSessions[token] else {
+            return .failure(.error("На токен"))
+        }
         guard let filename = queryParams.getValueForKey("name") else {
             return .failure(.error("На задано имя файла"))
-        }
-        guard
-            let e = queryParams.getValueForKey("keyE"),
-            let m = queryParams.getValueForKey("keyM")else {
-            return .failure(.error("На задан ключ"))
         }
         guard FileService.containsFile(name: filename) else {
             return .failure(.error("\(filename) не найден"))
@@ -41,15 +46,45 @@ class Backend {
             return .failure(.error("Не удалось прочитать файл"))
         }
         
-        let exponent = BigUInt(e.base64Data!)
-        let modulus = BigUInt(m.base64Data!)
+        return .success(JSON(["text" : text]))
+    }
+    
+    func checkUser(params: [String:String]) -> ReturnType {
+        guard
+            let password = params["password"],
+            let login = params["login"] else {
+                return .failure(.error("На задан логин или пароль"))
+        }
+        guard
+            let validPasswordForUser = validUsers[login],
+            password == validPasswordForUser else {
+                return .failure(.error("Неправильный логин или пароль"))
+        }
+        guard
+            let e = params["keyExponent"],
+            let m = params["keyModulus"] else {
+                return .failure(.error("На задан ключ RSA"))
+        }
+        let eS = e.replacingOccurrences(of: "%2B", with: "+").replacingOccurrences(of: "%3D", with: "=")
+        let mS = m.replacingOccurrences(of: "%2B", with: "+").replacingOccurrences(of: "%3D", with: "=")
+        let exponent = BigUInt(eS.base64Data!)
+        let modulus = BigUInt(mS.base64Data!)
+        let randomSting = generateRandomString(length: 128)
         assert(exponent == AppState.shared.keys!.public.exponent)
         assert(modulus == AppState.shared.keys!.public.modulus)
         let encodedText: BigUInt = AppState.shared.rsa.encode(
-            text: text,
+            text: randomSting,
             publicKey: RSAService.Key(exponent: exponent,
                                       modulus: modulus))
-        return .success(JSON(["text" : Array(encodedText.serialize())]))
+        let token = Int.random(in: 0 ..< 12451123)
+        currentSessions[login] = randomSting
+        return .success(JSON(["key" : Array(encodedText.serialize()),
+                              "token" : login]))
+    }
+    
+    private func generateRandomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
 }

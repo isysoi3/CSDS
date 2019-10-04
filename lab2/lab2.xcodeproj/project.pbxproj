@@ -11,6 +11,7 @@
 		D3AB11B723475883003D7E9E /* lab2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11B623475883003D7E9E /* lab2Tests.swift */; };
 		D3AB11C1234765C5003D7E9E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11BF234765C5003D7E9E /* LoginViewController.swift */; };
 		D3AB11C2234765C5003D7E9E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AB11C0234765C5003D7E9E /* LoginViewController.xib */; };
+		D3AB11C52347E67C003D7E9E /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11C42347E67C003D7E9E /* UIViewController+Alert.swift */; };
 		D3AD896F23466248001C1161 /* FileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD896D23466248001C1161 /* FileDetailsViewController.swift */; };
 		D3AD897023466248001C1161 /* FileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD896E23466248001C1161 /* FileDetailsViewController.xib */; };
 		D3BE77C323453F9000266EFD /* GenericSectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77C023453F9000266EFD /* GenericSectionAdapter.swift */; };
@@ -54,6 +55,7 @@
 		D3AB11B823475883003D7E9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3AB11BF234765C5003D7E9E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D3AB11C0234765C5003D7E9E /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		D3AB11C42347E67C003D7E9E /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		D3AD896D23466248001C1161 /* FileDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetailsViewController.swift; sourceTree = "<group>"; };
 		D3AD896E23466248001C1161 /* FileDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileDetailsViewController.xib; sourceTree = "<group>"; };
 		D3BE77C023453F9000266EFD /* GenericSectionAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericSectionAdapter.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				D3BE77C023453F9000266EFD /* GenericSectionAdapter.swift */,
 				D3BE77C123453F9000266EFD /* SectionAdapter.swift */,
 				D3BE77C223453F9000266EFD /* TableAdapter.swift */,
+				D3AB11C42347E67C003D7E9E /* UIViewController+Alert.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				D3BE77C723453FB300266EFD /* UITableView+TableAdapter.swift in Sources */,
 				D3BE77CB234541C300266EFD /* FileModel.swift in Sources */,
 				D3F6F77323453B3400377271 /* Array+StringTuple.swift in Sources */,
+				D3AB11C52347E67C003D7E9E /* UIViewController+Alert.swift in Sources */,
 				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,
 				D3BE77C323453F9000266EFD /* GenericSectionAdapter.swift in Sources */,

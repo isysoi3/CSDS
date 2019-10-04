@@ -50,7 +50,7 @@ class FilesListViewModel {
     
     func getFile(name: String) {
         isLoading = true
-        ServerRepository.shared.getFile(name: name) { [weak self] result in
+        ServerRepository.shared.getFile(name: name, token: AppState.shared.token!) { [weak self] result in
             guard let `self` = self else { return }
             self.isLoading = false
             switch result {

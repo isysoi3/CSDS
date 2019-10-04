@@ -26,6 +26,9 @@ class LoginViewController: UIViewController {
         title = "Authorization"
         loginTextField.delegate = self
         passwordTextField.delegate = self
+        
+        loginTextField.text = "test"
+        passwordTextField.text = "123"
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -37,9 +40,7 @@ class LoginViewController: UIViewController {
             else {
                 loginTextField.text = .none
                 passwordTextField.text = .none
-                let alert = UIAlertController(title: "Ошибка", message: "Заполините асе поля", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Хорошо", style: .default))
-                present(alert, animated: true)
+                self.showAlert(title: "Ошибка", message: "Заполините асе поля")
                 return
         }
         self.activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -52,7 +53,6 @@ class LoginViewController: UIViewController {
         
         DispatchQueue(label: "keys", qos: .userInitiated).async { [weak self] in
             guard let `self` = self else { return }
-            AppState.shared.generateKeys()
             ServerRepository.shared.login(
                 login: login,
                 password: password,
@@ -60,6 +60,20 @@ class LoginViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.activityIndicator?.stopAnimating()
                         self.activityIndicator?.removeFromSuperview()
+                    }
+                    switch result {
+                    case .success(let (token, key)):
+                        AppState.shared.serverKey = key
+                        AppState.shared.token = token
+                        self.navigationController?.pushViewController(FilesListViewController.newInstance(),
+                                                                      animated: true)
+                    case .failure(let error):
+                        switch error {
+                        case .server(let message):
+                            self.showAlert(title: "Ошибка", message: message)
+                        default:
+                            self.showAlert(title: "Ошибка", message: "что то не так")
+                        }
                     }
             }
            

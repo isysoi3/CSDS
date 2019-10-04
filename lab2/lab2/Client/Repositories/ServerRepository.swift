@@ -27,10 +27,31 @@ class ServerRepository {
     func login(login: String,
                password: String,
                key: RSAService.KeyString,
-               completionBlock: @escaping (Swift.Result<String, FileRepositoryErrorEnum>) -> ()) {
-        Alamofire.request("http://127.0.0.1:8181/api/v1/login", method: .post, parameters: ["login": login, "password": password, "keyE" : key.exponent, "keyM" : key.modulus])
+               completionBlock: @escaping (Swift.Result<(String, String), FileRepositoryErrorEnum>) -> ()) {
+        Alamofire.request("http://127.0.0.1:8181/api/v1/login", method: .post, parameters: ["login": login, "password": password, "keyExponent" : key.exponent, "keyModulus" : key.modulus])
             .responseJSON { [weak self] response in
-                completionBlock(.success("s"))
+                switch response.result {
+                case .success(let json):
+                    let json = JSON(json)
+                    if let error = self?.parseErrors(json: json) {
+                        completionBlock(.failure(.server(error)))
+                        return
+                    }
+                    guard let token = json["token"].string else {
+                        completionBlock(.failure(.parsing))
+                        return
+                    }
+                    guard let dataKey = json["key"].array else {
+                        completionBlock(.failure(.parsing))
+                        return
+                    }
+                    let array = dataKey.compactMap({ n in n.uInt8 })
+                    let key: String = AppState.shared.rsa.decode(decryptedData: BigUInt(Data(array)),
+                    privateKey: AppState.shared.keys!.private)
+                    completionBlock(.success((token, key)))
+                case .failure:
+                    completionBlock(.failure(.parsing))
+                }
         }
     }
     
@@ -42,6 +63,7 @@ class ServerRepository {
                     let json = JSON(json)
                     if let error = self?.parseErrors(json: json) {
                         completionBlock(.failure(.server(error)))
+                        return
                     }
                     guard  let array = json.array else {
                         completionBlock(.failure(.parsing))
@@ -63,23 +85,22 @@ class ServerRepository {
     }
     
     func getFile(name: String,
+                 token: String,
                  completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
-        Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: ["name" : name])
+        Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: ["name" : name, "token" : token])
             .responseJSON { [weak self] response in
                 switch response.result {
                 case .success(let json):
                     let json = JSON(json)
                     if let error = self?.parseErrors(json: json) {
                         completionBlock(.failure(.server(error)))
+                        return
                     }
-                    guard let data = try? json["text"].array else {
+                    guard let text = json["text"].string else {
                         completionBlock(.failure(.parsing))
                         return
                     }
-                    
-                    let array =  data.compactMap({ n in n.uInt8 })
-                    let text: String = AppState.shared.rsa.decode(decryptedData: BigUInt(Data(array)),
-                                                                  privateKey: AppState.shared.keys!.private)
+                                    
                     completionBlock(.success(FileModel(name: name, text: text)))
                 case .failure:
                     completionBlock(.failure(.parsing))
