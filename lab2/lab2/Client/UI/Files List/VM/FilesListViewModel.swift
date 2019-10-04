@@ -29,7 +29,7 @@ class FilesListViewModel {
     
     @objc func getFiles() {
         isLoading = true
-        FilesRepository.shared.getFiles { [weak self] result in
+        ServerRepository.shared.getFiles { [weak self] result in
             guard let `self` = self else { return }
             self.isLoading = false
             switch result {
@@ -49,13 +49,8 @@ class FilesListViewModel {
     }
     
     func getFile(name: String) {
-        guard let key = AppState.shared.publicKey else {
-            error = "Сгенерируйте ключ"
-            return
-        }
-        
         isLoading = true
-        FilesRepository.shared.getFile(name: name, key: key) { [weak self] result in
+        ServerRepository.shared.getFile(name: name) { [weak self] result in
             guard let `self` = self else { return }
             self.isLoading = false
             switch result {

@@ -15,11 +15,13 @@ class AppState {
     let rsa = RSAService()
     private(set) var keys: RSAService.Keys?
     
-    var publicKey: (RSAService.KeyString)? {
-        if let keys = keys {
-            return rsa.keyToString(keys.public)
+    var publicKey: (RSAService.KeyString) {
+        get {
+            if keys == nil {
+                keys = rsa.generateKeys(primeLength: 512)
+            }
+            return rsa.keyToString(keys!.public)
         }
-        return .none
     }
     
     private init() {

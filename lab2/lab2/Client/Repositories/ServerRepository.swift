@@ -11,9 +11,9 @@ import Alamofire
 import SwiftyJSON
 import BigInt
 
-class FilesRepository {
+class ServerRepository {
     
-    static let shared = FilesRepository()
+    static let shared = ServerRepository()
     
     private init () {
         
@@ -22,6 +22,16 @@ class FilesRepository {
     enum FileRepositoryErrorEnum: Error {
         case server(String)
         case parsing
+    }
+    
+    func login(login: String,
+               password: String,
+               key: RSAService.KeyString,
+               completionBlock: @escaping (Swift.Result<String, FileRepositoryErrorEnum>) -> ()) {
+        Alamofire.request("http://127.0.0.1:8181/api/v1/login", method: .post, parameters: ["login": login, "password": password, "keyE" : key.exponent, "keyM" : key.modulus])
+            .responseJSON { [weak self] response in
+                completionBlock(.success("s"))
+        }
     }
     
     func getFiles(completionBlock: @escaping (Swift.Result<[FileModel], FileRepositoryErrorEnum>) -> ()) {
@@ -53,10 +63,8 @@ class FilesRepository {
     }
     
     func getFile(name: String,
-                 key: RSAService.KeyString,
                  completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
-        let params = ["name" : name, "keyE" : key.exponent, "keyM" : key.modulus]
-        Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: params)
+        Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: ["name" : name])
             .responseJSON { [weak self] response in
                 switch response.result {
                 case .success(let json):

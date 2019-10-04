@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A6D37C753D4B140B99925460 /* Pods_lab2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADBB9F214039A658136E8A1 /* Pods_lab2.framework */; };
 		D3AB11B723475883003D7E9E /* lab2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11B623475883003D7E9E /* lab2Tests.swift */; };
+		D3AB11C1234765C5003D7E9E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11BF234765C5003D7E9E /* LoginViewController.swift */; };
+		D3AB11C2234765C5003D7E9E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AB11C0234765C5003D7E9E /* LoginViewController.xib */; };
 		D3AD896F23466248001C1161 /* FileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD896D23466248001C1161 /* FileDetailsViewController.swift */; };
 		D3AD897023466248001C1161 /* FileDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD896E23466248001C1161 /* FileDetailsViewController.xib */; };
 		D3BE77C323453F9000266EFD /* GenericSectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77C023453F9000266EFD /* GenericSectionAdapter.swift */; };
@@ -17,7 +19,7 @@
 		D3BE77C723453FB300266EFD /* UITableView+TableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77C623453FB300266EFD /* UITableView+TableAdapter.swift */; };
 		D3BE77CB234541C300266EFD /* FileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77CA234541C300266EFD /* FileModel.swift */; };
 		D3BE77CE234542E800266EFD /* FilesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77CD234542E800266EFD /* FilesListViewModel.swift */; };
-		D3BE77D12345450B00266EFD /* FilesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77D02345450B00266EFD /* FilesRepository.swift */; };
+		D3BE77D12345450B00266EFD /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE77D02345450B00266EFD /* ServerRepository.swift */; };
 		D3F6F7502345000F00377271 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F74F2345000F00377271 /* AppDelegate.swift */; };
 		D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F6F7512345000F00377271 /* SceneDelegate.swift */; };
 		D3F6F7592345001000377271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F6F7582345001000377271 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 		D3AB11B423475883003D7E9E /* lab2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lab2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3AB11B623475883003D7E9E /* lab2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lab2Tests.swift; sourceTree = "<group>"; };
 		D3AB11B823475883003D7E9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3AB11BF234765C5003D7E9E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D3AB11C0234765C5003D7E9E /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		D3AD896D23466248001C1161 /* FileDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDetailsViewController.swift; sourceTree = "<group>"; };
 		D3AD896E23466248001C1161 /* FileDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileDetailsViewController.xib; sourceTree = "<group>"; };
 		D3BE77C023453F9000266EFD /* GenericSectionAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericSectionAdapter.swift; sourceTree = "<group>"; };
@@ -58,7 +62,7 @@
 		D3BE77C623453FB300266EFD /* UITableView+TableAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableAdapter.swift"; sourceTree = "<group>"; };
 		D3BE77CA234541C300266EFD /* FileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModel.swift; sourceTree = "<group>"; };
 		D3BE77CD234542E800266EFD /* FilesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesListViewModel.swift; sourceTree = "<group>"; };
-		D3BE77D02345450B00266EFD /* FilesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesRepository.swift; sourceTree = "<group>"; };
+		D3BE77D02345450B00266EFD /* ServerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
 		D3F6F74C2345000F00377271 /* lab2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lab2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F6F74F2345000F00377271 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3F6F7512345000F00377271 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,9 +116,20 @@
 			path = lab2Tests;
 			sourceTree = "<group>";
 		};
+		D3AB11BE2347658C003D7E9E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D3AB11BF234765C5003D7E9E /* LoginViewController.swift */,
+				D3AB11C0234765C5003D7E9E /* LoginViewController.xib */,
+			);
+			name = Login;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		D3AD896B2346612A001C1161 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D3AB11BE2347658C003D7E9E /* Login */,
 				D3F6F77823453C5900377271 /* Files List */,
 				D3AD896C23466134001C1161 /* Files Details */,
 			);
@@ -169,7 +184,7 @@
 		D3BE77CF234544F700266EFD /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				D3BE77D02345450B00266EFD /* FilesRepository.swift */,
+				D3BE77D02345450B00266EFD /* ServerRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -357,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3AB11C2234765C5003D7E9E /* LoginViewController.xib in Resources */,
 				D3F6F77723453C0300377271 /* FilesListViewController.xib in Resources */,
 				D3F6F75C2345001000377271 /* LaunchScreen.storyboard in Resources */,
 				D3F6F7592345001000377271 /* Assets.xcassets in Resources */,
@@ -425,6 +441,7 @@
 				D3F6F77623453C0300377271 /* FilesListViewController.swift in Sources */,
 				D3BE77C523453F9000266EFD /* TableAdapter.swift in Sources */,
 				D3FC1BC12346732B003B2E43 /* AppState.swift in Sources */,
+				D3AB11C1234765C5003D7E9E /* LoginViewController.swift in Sources */,
 				D3AD896F23466248001C1161 /* FileDetailsViewController.swift in Sources */,
 				D3BE77CE234542E800266EFD /* FilesListViewModel.swift in Sources */,
 				D3F6F76A23451BDE00377271 /* Backend.swift in Sources */,
@@ -438,7 +455,7 @@
 				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,
 				D3BE77C323453F9000266EFD /* GenericSectionAdapter.swift in Sources */,
-				D3BE77D12345450B00266EFD /* FilesRepository.swift in Sources */,
+				D3BE77D12345450B00266EFD /* ServerRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

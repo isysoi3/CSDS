@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 func showFilesListViewControllerOn(window: UIWindow) {
-    let vc = FilesListViewController.newInstance()
+    let vc = LoginViewController.newInstance()
     let nc = UINavigationController(rootViewController: vc)
     window.rootViewController = nc
     window.makeKeyAndVisible()
