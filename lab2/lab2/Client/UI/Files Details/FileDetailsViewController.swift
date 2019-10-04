@@ -29,6 +29,7 @@ class FileDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         title = file?.name
+        textView.isEditable = false
         textView.text = file?.text
     }
 
