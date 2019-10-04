@@ -15,8 +15,6 @@ class RSAService {
     typealias KeyString = (exponent: String, modulus: String)
     typealias Keys = (`public`: Key, `private`: Key)
     
-    private let e = BigUInt(65537)
-    
     private func generatePrime(_ width: Int) -> BigUInt {
         while true {
             var random = BigUInt.randomInteger(withExactWidth: width)
@@ -27,11 +25,21 @@ class RSAService {
         }
     }
     
+    private func generateE(_ width: Int, fn: BigUInt) -> BigUInt {
+        while true {
+            var random = BigUInt.randomInteger(withExactWidth: width)
+            if random.isPrime() && random.greatestCommonDivisor(with: fn) == BigUInt(1) {
+                return random
+            }
+        }
+    }
+    
     func generateKeys(primeLength: Int = 64) -> Keys {
         let p = generatePrime(primeLength)
         let q = generatePrime(primeLength)
         let n = p * q
         let fn = (p - 1) * (q - 1)
+        let e = generateE(primeLength+2, fn: fn)
         let d = e.inverse(BigUInt(fn))!
         let publicKey: Key = (e, n)
         let privateKey: Key = (d, n)
@@ -40,7 +48,8 @@ class RSAService {
     }
     
     func keyToString(_ key: Key) -> KeyString {
-        (key.exponent.serialize().base64String, key.modulus.serialize().base64String)
+        (key.exponent.serialize().base64EncodedString(),
+         key.modulus.serialize().base64EncodedString())
     }
 }
 
@@ -48,21 +57,16 @@ class RSAService {
 // MARK: - encoding
 extension RSAService {
     
-    func encode(text: String, publicKey key: Key) -> String? {
-        let result: BigUInt = encode(text: text, publicKey: key)
-        return result.serialize().base64String
-    }
+//    func encode(text: String, publicKey key: Key) -> String {
+//        String(data: encode(text: text, publicKey: key).serialize(), encoding: .utf8)!
+//    }
     
     func encode(text: String, publicKey key: Key) -> BigUInt {
-        guard let data = text.data(using: .ascii) else {
+        guard let data = text.data(using: .utf8) else {
             fatalError("Error: Couldn't convert to data. \(text)")
         }
         
         return BigUInt(data).endecrypt(RSAKey: key)
-    }
-    
-    func encodeEachChar(text: String, publicKey key: Key) -> [BigUInt] {
-        text.map { encode(text: String($0), publicKey: key) }
     }
     
 }
@@ -71,20 +75,17 @@ extension RSAService {
 // MARK: - decoding
 extension RSAService {
 
-    func decode(text: String, privateKey key: Key) -> String {
-        decode(decryptedData: BigUInt(text.base64Data!), privateKey: key)
-    }
+//    func decode(text: String, privateKey key: Key) -> String {
+//        decode(decryptedData: BigUInt(text.data(using: .utf8)!), privateKey: key)
+//    }
+//
     
     func decode(decryptedData: BigUInt, privateKey key: Key) -> String {
-        let decryptedData = decryptedData.endecrypt(RSAKey: key)
-        if let text = String(data: decryptedData.serialize(), encoding: .ascii) {
+        let tmp = decryptedData.endecrypt(RSAKey: key)
+        if let text = String(data: tmp.serialize(), encoding: .utf8) {
             return text
         }
         fatalError("Error: Couldn't convert to text. \(decryptedData.serialize())")
-    }
-    
-    func decodeEachChar(decryptedData: [BigUInt], privateKey key: Key) -> String {
-        decryptedData.map { decode(decryptedData: $0, privateKey: key) }.joined()
     }
     
 }
@@ -94,14 +95,6 @@ extension BigUInt {
     
     func endecrypt(RSAKey key: RSAService.Key) -> BigUInt {
         return self.power(key.exponent, modulus: key.modulus)
-    }
-    
-}
-
-extension Data {
-    
-    var base64String: String {
-        return self.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
     }
     
 }

@@ -41,11 +41,15 @@ class Backend {
             return .failure(.error("Не удалось прочитать файл"))
         }
         
-        let encodedText: String! = AppState.shared.rsa.encode(
+        let exponent = BigUInt(e.base64Data!)
+        let modulus = BigUInt(m.base64Data!)
+        assert(exponent == AppState.shared.keys!.public.exponent)
+        assert(modulus == AppState.shared.keys!.public.modulus)
+        let encodedText: BigUInt = AppState.shared.rsa.encode(
             text: text,
-            publicKey: RSAService.Key(exponent: BigUInt(e.base64Data!),
-                                      modulus: BigUInt(m.base64Data!)))
-        return .success(JSON(["text" : encodedText]))
+            publicKey: RSAService.Key(exponent: exponent,
+                                      modulus: modulus))
+        return .success(JSON(["text" : Array(encodedText.serialize())]))
     }
     
 }

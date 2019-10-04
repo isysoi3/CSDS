@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import BigInt
 
 class FilesRepository {
     
@@ -63,12 +64,14 @@ class FilesRepository {
                     if let error = self?.parseErrors(json: json) {
                         completionBlock(.failure(.server(error)))
                     }
-                    guard let encodedText = json["text"].string else {
+                    guard let data = try? json["text"].array else {
                         completionBlock(.failure(.parsing))
                         return
                     }
-                    let text: String = AppState.shared.rsa.decode(text: encodedText,
-                                                                privateKey: AppState.shared.keys!.private)
+                    
+                    let array =  data.compactMap({ n in n.uInt8 })
+                    let text: String = AppState.shared.rsa.decode(decryptedData: BigUInt(Data(array)),
+                                                                  privateKey: AppState.shared.keys!.private)
                     completionBlock(.success(FileModel(name: name, text: text)))
                 case .failure:
                     completionBlock(.failure(.parsing))
