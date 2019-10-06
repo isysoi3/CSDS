@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A6D37C753D4B140B99925460 /* Pods_lab2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADBB9F214039A658136E8A1 /* Pods_lab2.framework */; };
+		D361ED412349DF76000F1E38 /* IDEAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED402349DF76000F1E38 /* IDEAService.swift */; };
 		D3AB11B723475883003D7E9E /* lab2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11B623475883003D7E9E /* lab2Tests.swift */; };
 		D3AB11C1234765C5003D7E9E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11BF234765C5003D7E9E /* LoginViewController.swift */; };
 		D3AB11C2234765C5003D7E9E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AB11C0234765C5003D7E9E /* LoginViewController.xib */; };
@@ -50,6 +51,7 @@
 		3B3A051DF2430454A5A739D5 /* Pods-lab2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lab2.debug.xcconfig"; path = "Target Support Files/Pods-lab2/Pods-lab2.debug.xcconfig"; sourceTree = "<group>"; };
 		A81E0189EA8ACBA0725561FF /* Pods-lab2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lab2.release.xcconfig"; path = "Target Support Files/Pods-lab2/Pods-lab2.release.xcconfig"; sourceTree = "<group>"; };
 		BADBB9F214039A658136E8A1 /* Pods_lab2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lab2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D361ED402349DF76000F1E38 /* IDEAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDEAService.swift; sourceTree = "<group>"; };
 		D3AB11B423475883003D7E9E /* lab2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lab2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3AB11B623475883003D7E9E /* lab2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lab2Tests.swift; sourceTree = "<group>"; };
 		D3AB11B823475883003D7E9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +109,15 @@
 				BADBB9F214039A658136E8A1 /* Pods_lab2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D361ED3F2349DF62000F1E38 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D3F6F7642345024A00377271 /* RSAService.swift */,
+				D361ED402349DF76000F1E38 /* IDEAService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		D3AB11B523475883003D7E9E /* lab2Tests */ = {
@@ -215,7 +226,7 @@
 		D3F6F74E2345000F00377271 /* lab2 */ = {
 			isa = PBXGroup;
 			children = (
-				D3F6F7642345024A00377271 /* RSAService.swift */,
+				D361ED3F2349DF62000F1E38 /* Service */,
 				D3F6F76623451A4C00377271 /* Http Server */,
 				D3F6F76F234531B200377271 /* Client */,
 			);
@@ -447,6 +458,7 @@
 				D3AB11C1234765C5003D7E9E /* LoginViewController.swift in Sources */,
 				D3AD896F23466248001C1161 /* FileDetailsViewController.swift in Sources */,
 				D3BE77CE234542E800266EFD /* FilesListViewModel.swift in Sources */,
+				D361ED412349DF76000F1E38 /* IDEAService.swift in Sources */,
 				D3F6F76A23451BDE00377271 /* Backend.swift in Sources */,
 				D3F6F76C23451C0900377271 /* Router.swift in Sources */,
 				D3F6F76823451A5D00377271 /* Server.swift in Sources */,

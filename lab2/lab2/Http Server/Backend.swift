@@ -69,7 +69,7 @@ class Backend {
         let mS = m.replacingOccurrences(of: "%2B", with: "+").replacingOccurrences(of: "%3D", with: "=")
         let exponent = BigUInt(eS.base64Data!)
         let modulus = BigUInt(mS.base64Data!)
-        let randomSting = generateRandomString(length: 128)
+        let randomSting = generateRandomString(length: 16)
         assert(exponent == AppState.shared.keys!.public.exponent)
         assert(modulus == AppState.shared.keys!.public.modulus)
         let encodedText: BigUInt = AppState.shared.rsa.encode(

@@ -23,7 +23,7 @@ class AppState {
     var publicKey: (RSAService.KeyString) {
         get {
             if keys == nil {
-                keys = rsa.generateKeys(primeLength: 512)
+                keys = rsa.generateKeys(primeLength: 64)
                 saveKeysToStorage()
             }
             return rsa.keyToString(keys!.public)

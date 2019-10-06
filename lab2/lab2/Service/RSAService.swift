@@ -27,7 +27,7 @@ class RSAService {
     
     private func generateE(_ width: Int, fn: BigUInt) -> BigUInt {
         while true {
-            var random = BigUInt.randomInteger(withExactWidth: width)
+            let random = BigUInt.randomInteger(withExactWidth: width)
             if random.isPrime() && random.greatestCommonDivisor(with: fn) == BigUInt(1) {
                 return random
             }
