@@ -61,7 +61,7 @@ class FilesListViewController: UIViewController {
             target: viewModel,
             action: #selector(viewModel.generateKeys))
         
-        title = "RSA Notes"
+        title = "Notes"
     }
     
     func initVM() {
@@ -73,9 +73,7 @@ class FilesListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] error in
                 if let error = error {
-                    let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Хорошо", style: .default))
-                    self?.present(alert, animated: true)
+                    self?.showAlert(title: "Ошибка", message: error)
                 }
             })
         
@@ -110,7 +108,11 @@ class FilesListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] message in
                 if let message = message {
-                    self?.showAlert(title: "Ошибка", message: message)
+                    self?.showAlert(title: "Инфо",
+                                    message: message,
+                                    okBlock: { [weak self] in
+                                        self?.navigationController?.popViewController(animated: true)
+                    })
                 }
             })
     }

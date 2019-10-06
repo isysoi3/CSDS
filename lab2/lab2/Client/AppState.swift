@@ -16,7 +16,7 @@ class AppState {
     private let keychain = KeychainSwift()
     
     let rsa = RSAService()
-    private(set) var keys: RSAService.Keys?
+    var keys: RSAService.Keys?
     var token: String? = .none
     var serverKey: String? = .none
     
@@ -38,11 +38,6 @@ class AppState {
             keys = (public: (BigUInt(pE), BigUInt(pM)),
                     private: (BigUInt(prE), BigUInt(prM)))
         }
-    }
-    
-    func generateKeys() {
-        keys = rsa.generateKeys(primeLength: 512)
-        saveKeysToStorage()
     }
     
     private func saveKeysToStorage() {
