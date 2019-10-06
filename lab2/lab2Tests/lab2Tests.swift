@@ -33,8 +33,8 @@ class lab2Tests: XCTestCase {
     
     func testLargeText() {
         let service = RSAService()
-        let messsgae = (0..<128).map { _ in "H"}.joined()
-        let keys = service.generateKeys(primeLength: 512)
+        let messsgae = (0..<16).map { _ in "H"}.joined()
+        let keys = service.generateKeys(primeLength: 64)
         
         let data = service.encode(text: messsgae,
                                   publicKey: keys.public)
@@ -43,6 +43,22 @@ class lab2Tests: XCTestCase {
         XCTAssert(messsgae == newMessage)
        }
 
+    func testIDEA() {
+        let service = IDEAService()
+        var text: [UInt8] = [1, 2, 3, 4, 5, 6, 7, 8]
+        let key = "asdfasdfasdfasdf"
+        let keyData = key.data(using: .utf8)!
+        let subKey = service.generateSubkeys(userKey: Array(keyData))
+        let invSubKey = service.invertSubkey(subkey: subKey)
+        service.crypt(data: &text, subKey: subKey, offset: 0)
+        let tmp = text
+        service.crypt(data: &text, subKey: invSubKey, offset: 0)
+    
+        XCTAssert(text == [1, 2, 3, 4, 5, 6, 7, 8])
+    }
+
+
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         measure {
