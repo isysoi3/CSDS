@@ -15,8 +15,10 @@ class ServerRepository {
     
     static let shared = ServerRepository()
     
+    private let service: IDEAService
+    
     private init () {
-        
+        service = IDEAService()
     }
     
     enum FileRepositoryErrorEnum: Error {
@@ -89,17 +91,20 @@ class ServerRepository {
                  completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
         Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: ["name" : name, "token" : token])
             .responseJSON { [weak self] response in
+                guard let `self` = self else { return }
                 switch response.result {
                 case .success(let json):
                     let json = JSON(json)
-                    if let error = self?.parseErrors(json: json) {
+                    if let error = self.parseErrors(json: json) {
                         completionBlock(.failure(.server(error)))
                         return
                     }
-                    guard let text = json["text"].string else {
+                    guard let textData = json["text"].array else {
                         completionBlock(.failure(.parsing))
                         return
                     }
+                    let array = textData.compactMap({ n in n.uInt8 })
+                    let text = self.service.decode(data: array, key: AppState.shared.serverKey!)
                                     
                     completionBlock(.success(FileModel(name: name, text: text)))
                 case .failure:

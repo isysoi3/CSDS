@@ -20,7 +20,7 @@ class Backend {
     
     private let validUsers = ["test" : "123"]
     private var currentSessions: [String : String] = [:]
-    
+    private let service = IDEAService()
     
     typealias ReturnType = Result<JSON, BackendErrorEnum>
     
@@ -45,8 +45,9 @@ class Backend {
         guard let text = try? FileService.read(from: filename) else {
             return .failure(.error("Не удалось прочитать файл"))
         }
-        
-        return .success(JSON(["text" : text]))
+        let encoded = service.encode(text: text,
+                                     key: key)
+        return .success(JSON(["text" : encoded]))
     }
     
     func checkUser(params: [String:String]) -> ReturnType {
