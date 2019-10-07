@@ -11,6 +11,8 @@ import Swifter
 
 class Server {
     
+    private let semaphore = DispatchSemaphore(value: 0)
+    
     private let server: HttpServer
     private let router: Router
     
@@ -33,15 +35,16 @@ class Server {
         router.hanldeForPath.forEach { (path, handler) in
             server[path] = handler
         }
-        try? FileService.wrire((0..<128).map { _ in "H"}.joined(), to: "key")
     }
     
     func start() {
         do {
             try server.start(port, forceIPv4: true, priority: .default)
             print("Server has started ( port = \(port) ). Try to connect now...")
+            semaphore.wait()
         } catch {
             print("Server start error: \(error)")
+            semaphore.signal()
         }
     }
     

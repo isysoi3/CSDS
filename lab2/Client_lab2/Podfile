@@ -2,7 +2,6 @@ platform :ios, '13.0'
 
 target 'lab2' do
   use_frameworks!
-  pod 'Swifter'
   pod 'BigInt'
   pod 'SwiftyJSON'
   pod 'Alamofire'

@@ -13,11 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let server = Server()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        server.start()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         showFilesListViewControllerOn(window: window!)

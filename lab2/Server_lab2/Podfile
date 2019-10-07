@@ -1,0 +1,10 @@
+platform :osx, '10.14'
+
+target 'Server_lab2' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  #use_frameworks!
+  pod 'Swifter'
+  pod 'BigInt'
+  pod 'SwiftyJSON'
+
+end

@@ -16,9 +16,11 @@ class ServerRepository {
     static let shared = ServerRepository()
     
     private let service: IDEAService
+    private let url = "http://192.168.100.222:8181/api/v1"
     
     private init () {
         service = IDEAService()
+        
     }
     
     enum FileRepositoryErrorEnum: Error {
@@ -30,7 +32,7 @@ class ServerRepository {
                password: String,
                key: RSAService.KeyString,
                completionBlock: @escaping (Swift.Result<(String, String), FileRepositoryErrorEnum>) -> ()) {
-        Alamofire.request("http://127.0.0.1:8181/api/v1/login", method: .post, parameters: ["login": login, "password": password, "keyExponent" : key.exponent, "keyModulus" : key.modulus])
+        Alamofire.request("\(url)/login", method: .post, parameters: ["login": login, "password": password, "keyExponent" : key.exponent, "keyModulus" : key.modulus])
             .responseJSON { [weak self] response in
                 switch response.result {
                 case .success(let json):
@@ -58,7 +60,7 @@ class ServerRepository {
     }
     
     func getFiles(completionBlock: @escaping (Swift.Result<[FileModel], FileRepositoryErrorEnum>) -> ()) {
-        Alamofire.request("http://127.0.0.1:8181/api/v1/files", method: .get)
+        Alamofire.request("\(url)/files", method: .get)
             .responseJSON { [weak self] response in
                 switch response.result {
                 case .success(let json):
@@ -89,7 +91,7 @@ class ServerRepository {
     func getFile(name: String,
                  token: String,
                  completionBlock: @escaping (Swift.Result<FileModel, FileRepositoryErrorEnum>) -> ()) {
-        Alamofire.request("http://127.0.0.1:8181/api/v1/file", method: .get, parameters: ["name" : name, "token" : token])
+        Alamofire.request("\(url)/file", method: .get, parameters: ["name" : name, "token" : token])
             .responseJSON { [weak self] response in
                 guard let `self` = self else { return }
                 switch response.result {

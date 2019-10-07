@@ -20,7 +20,8 @@ class Backend {
     
     private let validUsers = ["test" : "123"]
     private var currentSessions: [String : String] = [:]
-    private let service = IDEAService()
+    private let ideaService = IDEAService()
+    private let rsaService = RSAService()
     
     typealias ReturnType = Result<JSON, BackendErrorEnum>
     
@@ -45,7 +46,7 @@ class Backend {
         guard let text = try? FileService.read(from: filename) else {
             return .failure(.error("Не удалось прочитать файл"))
         }
-        let encoded = service.encode(text: text,
+        let encoded = ideaService.encode(text: text,
                                      key: key)
         return .success(JSON(["text" : encoded]))
     }
@@ -71,9 +72,7 @@ class Backend {
         let exponent = BigUInt(eS.base64Data!)
         let modulus = BigUInt(mS.base64Data!)
         let randomSting = generateRandomString(length: 16)
-        assert(exponent == AppState.shared.keys!.public.exponent)
-        assert(modulus == AppState.shared.keys!.public.modulus)
-        let encodedText: BigUInt = AppState.shared.rsa.encode(
+        let encodedText: BigUInt = rsaService.encode(
             text: randomSting,
             publicKey: RSAService.Key(exponent: exponent,
                                       modulus: modulus))

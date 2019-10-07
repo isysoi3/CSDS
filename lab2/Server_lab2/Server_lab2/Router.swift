@@ -18,9 +18,9 @@ class Router {
     
     init() {
         hanldeForPath = [ "/hello" : helloHandler,
-                          "api/v1/files" : getFilesHandler,
-                          "api/v1/file" : getFileHandler,
-                          "api/v1/login" : loginHandler]
+                          "/api/v1/files" : getFilesHandler,
+                          "/api/v1/file" : getFileHandler,
+                          "/api/v1/login" : loginHandler]
     }
     
     private func buildResponseForResult(_ result: Result<JSON, BackendErrorEnum>) -> HttpResponse {
