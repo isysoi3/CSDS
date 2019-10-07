@@ -16,28 +16,47 @@ class IDEAService {
     
     private let initlialVector = "abcdefgh"
     
-    func encode(text: String, key: String) -> [UInt8] {
+    func encodeOFB(text: String, key: String) -> [UInt8] {
         var dataToEncode: [UInt8] = Array(initlialVector.data(using: .ascii)!)
         let textData: [UInt8] = Array(text.data(using: .ascii)!)
         let texts = textData.chunked(into: BLOCK_SIZE)
         let subKey = generateSubkeys(userKey: Array(key.data(using: .ascii)!))
         var result: [UInt8] = []
         for textPart in texts {
-//            dataToEncode = crypt(data: dataToEncode, subKey: subKey)
-//            result.append(contentsOf: zip(dataToEncode, textPart).map({ (a, b) in a | b}))
+            dataToEncode = crypt(data: dataToEncode, subKey: subKey)
+            result.append(contentsOf: zip(textPart, dataToEncode).map({ (a, b) in a ^ b}))
+        }
+        return result
+    }
+       
+    func decodeOFB(data: [UInt8], key: String) -> String {
+        var dataToDecode: [UInt8] = Array(initlialVector.data(using: .ascii)!)
+        let subKey = generateSubkeys(userKey: Array(key.data(using: .ascii)!))
+        let texts = data.chunked(into: BLOCK_SIZE)
+        var result: [UInt8] = []
+        for textPart in texts {
+            dataToDecode = crypt(data: dataToDecode, subKey: subKey)
+            result.append(contentsOf: zip(dataToDecode, textPart).map({ (a, b) in a ^ b}))
+        }
+        return String(data: Data(result), encoding: .ascii) ?? ""
+    }
+    
+    func encode(text: String, key: String) -> [UInt8] {
+        let textData: [UInt8] = Array(text.data(using: .ascii)!)
+        let texts = textData.chunked(into: BLOCK_SIZE)
+        let subKey = generateSubkeys(userKey: Array(key.data(using: .ascii)!))
+        var result: [UInt8] = []
+        for textPart in texts {
             result.append(contentsOf: crypt(data: textPart, subKey: subKey))
         }
         return result
     }
     
     func decode(data: [UInt8], key: String) -> String {
-        var dataToDecode: [UInt8] = Array(initlialVector.data(using: .ascii)!)
-        let invSubKey = invertSubkey(subkey: generateSubkeys(userKey: Array(Array(key.data(using: .ascii)!))))
+        let invSubKey = invertSubkey(subkey: generateSubkeys(userKey: Array(key.data(using: .ascii)!)))
         let texts = data.chunked(into: BLOCK_SIZE)
         var result: [UInt8] = []
         for textPart in texts {
-//            dataToDecode = crypt(data: dataToDecode, subKey: invSubKey)
-//            result.append(contentsOf: zip(dataToDecode, textPart).map({ (a, b) in a | b}))
             result.append(contentsOf: crypt(data: textPart, subKey: invSubKey))
         }
         return String(data: Data(result), encoding: .ascii) ?? ""
