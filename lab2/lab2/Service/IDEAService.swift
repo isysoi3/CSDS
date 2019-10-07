@@ -10,142 +10,49 @@ import Foundation
 
 class IDEAService {
     
-    func decode(text: String, key: String) -> String {
-        
-        return ""
-    }
-    
-    func encode(text: String, key: String) -> String {
-        
-        return ""
-    }
-    
-    //    private func KALayer(x1: UInt128,
-    //                         x2: UInt128,
-    //                         x3: UInt128,
-    //                         x4: UInt128,
-    //                         roundKeys: [UInt128]) -> [UInt128] {
-    //        assert(0 <= x1 && x1 <= 0xFFFF)
-    //        assert(0 <= x2 && x2 <= 0xFFFF)
-    //        assert(0 <= x3 && x3 <= 0xFFFF)
-    //        assert(0 <= x4 && x4 <= 0xFFFF)
-    //        let z1 = roundKeys[0]
-    //        let z2 = roundKeys[1]
-    //        let z3 = roundKeys[2]
-    //        let z4 = roundKeys[3]
-    //        assert(0 <= z1 && z1 <= 0xFFFF)
-    //        assert(0 <= z2 && z2 <= 0xFFFF)
-    //        assert(0 <= z3 && z3 <= 0xFFFF)
-    //        assert(0 <= z4 && z4 <= 0xFFFF)
-    //        let y1 = multiply(x: x1, y: z1)
-    //        let y2 = (x2 + z2) % 0x10000
-    //        let y3 = (x3 + z3) % 0x10000
-    //        let y4 = multiply(x: x4, y: z4)
-    //
-    //        return [y1, y2, y3, y4]
-    //    }
-    //
-    //    private func MALayer(y1: UInt128,
-    //                         y2: UInt128,
-    //                         y3: UInt128,
-    //                         y4: UInt128,
-    //                         roundKeys: [UInt128]) -> [UInt128] {
-    //        assert(0 <= y1 && y1 <= 0xFFFF)
-    //        assert(0 <= y2 && y2 <= 0xFFFF)
-    //        assert(0 <= y3 && y3 <= 0xFFFF)
-    //        assert(0 <= y4 && y4 <= 0xFFFF)
-    //        let z5 = roundKeys[4]
-    //        let z6 = roundKeys[6]
-    //        assert(0 <= z5 && z5 <= 0xFFFF)
-    //        assert(0 <= z6 && z6 <= 0xFFFF)
-    //        let p = y1 ^ y3
-    //        let q = y2 ^ y4
-    //
-    //        let s = multiply(x: p, y: p)
-    //        let t = multiply(x: (q + s) % 0x10000, y: z6)
-    //        let u = (s + t) % 0x10000
-    //
-    //        let x1 = y1 ^ t
-    //        let x2 = y2 ^ u
-    //        let x3 = y3 ^ t
-    //        let x4 = y4 ^ u
-    //
-    //        return [x1, x2, x3, x4]
-    //    }
-    //
-    //    private func changeKey(_ key: UInt128) -> [[UInt128]] {
-    ////        assert(0 <= key && key < (1 << 128))
-    //        let modulus: UInt128 = 1 << 128
-    //        var subKeys: [UInt128] = []
-    //        var _key: UInt128 = key
-    //
-    //        for i in (0..<9 * 6) {
-    //            subKeys.append((key >> (112 - 16 * (i % 8))) % 0x10000)
-    //            if i % 8 == 7 {
-    //                _key = ((_key << 25) | (_key >> 103)) % modulus
-    //            }
-    //        }
-    //
-    //        var keys: [[UInt128]] = [[]]
-    //        for i in 0..<9 {
-    //            for j in ((6 * i)..<(6 * (i + 1))) {
-    //                keys[i].append(subKeys[j])
-    //            }
-    //        }
-    //
-    //        return keys
-    //    }
-    //
-    //    func encrypt(text: UInt128, key: UInt128) -> UInt128 {
-    ////        assert(0 <= text && text < (1 <<< 64))
-    //        let keys = changeKey(key)
-    //        var x1 = (text >> 48) & 0xFFFF
-    //        var x2 = (text >> 32) & 0xFFFF
-    //        var x3 = (text >> 16) & 0xFFFF
-    //        var x4 = text & 0xFFFF
-    //
-    //        for i in 0..<8 {
-    //            let roundKeys = keys[i]
-    //            //y1, y2, y3, y4
-    //            let ys = KALayer(x1: x1,
-    //                             x2: x2,
-    //                             x3: x3,
-    //                             x4: x4,
-    //                             roundKeys: roundKeys)
-    //
-    ////            x1, x2, x3, x4
-    //            let xs = MALayer(y1: ys[0],
-    //                             y2: ys[1],
-    //                             y3: ys[2],
-    //                             y4: ys[3],
-    //                             roundKeys: roundKeys)
-    //            x1 = xs[0]
-    //            x2 = xs[2]
-    //            x3 = xs[1]
-    //            x4 = xs[4]
-    //        }
-    //
-    //
-    //        let ys = KALayer(x1: x1, x2: x2, x3: x3, x4: x4, roundKeys: keys[8])
-    //
-    //        return (ys[0] << 48) | (ys[1] << 32) | (ys[2] << 16) | ys[3]
-    //
-    //    }
-    
     private let KEY_SIZE = 16
     private let BLOCK_SIZE = 8
     private let ROUNDS = 8
     
+    private let initlialVector = "abcdefgh"
     
-    func crypt(data: inout [UInt8], subKey: [Int], offset: Int) {
-        var x1 = concat2Bytes(first: data[offset + 0],
-                              second: data[offset + 1])
-        var x2 = concat2Bytes(first: data[offset + 2],
-                              second: data[offset + 3])
-        var x3 = concat2Bytes(first: data[offset + 4],
-                              second: data[offset + 5])
-        var x4 = concat2Bytes(first: data[offset + 6],
-                              second: data[offset + 7])
+    func encode(text: String, key: String) -> [UInt8] {
+        var dataToEncode: [UInt8] = Array(initlialVector.data(using: .ascii)!)
+        let textData: [UInt8] = Array(text.data(using: .ascii)!)
+        let texts = textData.chunked(into: BLOCK_SIZE)
+        let subKey = generateSubkeys(userKey: Array(key.data(using: .ascii)!))
+        var result: [UInt8] = []
+        for textPart in texts {
+//            dataToEncode = crypt(data: dataToEncode, subKey: subKey)
+//            result.append(contentsOf: zip(dataToEncode, textPart).map({ (a, b) in a | b}))
+            result.append(contentsOf: crypt(data: textPart, subKey: subKey))
+        }
+        return result
+    }
+    
+    func decode(data: [UInt8], key: String) -> String {
+        var dataToDecode: [UInt8] = Array(initlialVector.data(using: .ascii)!)
+        let invSubKey = invertSubkey(subkey: generateSubkeys(userKey: Array(Array(key.data(using: .ascii)!))))
+        let texts = data.chunked(into: BLOCK_SIZE)
+        var result: [UInt8] = []
+        for textPart in texts {
+//            dataToDecode = crypt(data: dataToDecode, subKey: invSubKey)
+//            result.append(contentsOf: zip(dataToDecode, textPart).map({ (a, b) in a | b}))
+            result.append(contentsOf: crypt(data: textPart, subKey: invSubKey))
+        }
+        return String(data: Data(result), encoding: .ascii) ?? ""
+    }
+
+    func crypt(data: [UInt8], subKey: [Int]) -> [UInt8] {
+        var x1 = concat2Bytes(first: data[0],
+                              second: data[1])
+        var x2 = concat2Bytes(first: data[2],
+                              second: data[3])
+        var x3 = concat2Bytes(first: data[4],
+                              second: data[5])
+        var x4 = concat2Bytes(first: data[6],
+                              second: data[7])
+        var result = [UInt8](repeating: 0, count: data.count)
         // Each round
         var k = 0 // Subkey index
         for _ in (0..<ROUNDS) {
@@ -180,34 +87,38 @@ class IDEAService {
         let r3 = mul(x: x4, y: subKey[k])                // Multiply X4 and the fourth subkey
         // Reattach the four sub-blocks
         
-        data[offset + 0] = UInt8(truncatingIfNeeded: r0 >> 8)
-        data[offset + 1] = UInt8(truncatingIfNeeded: r0)
-        data[offset + 2] = UInt8(truncatingIfNeeded: r1 >> 8)
-        data[offset + 3] = UInt8(truncatingIfNeeded: r1)
-        data[offset + 4] = UInt8(truncatingIfNeeded: r2 >> 8)
-        data[offset + 5] = UInt8(truncatingIfNeeded: r2)
-        data[offset + 6] = UInt8(truncatingIfNeeded: r3 >> 8)
-        data[offset + 7] = UInt8(truncatingIfNeeded: r3)
+        result[0] = UInt8(truncatingIfNeeded: r0 >> 8)
+        result[1] = UInt8(truncatingIfNeeded: r0)
+        result[2] = UInt8(truncatingIfNeeded: r1 >> 8)
+        result[3] = UInt8(truncatingIfNeeded: r1)
+        result[4] = UInt8(truncatingIfNeeded: r2 >> 8)
+        result[5] = UInt8(truncatingIfNeeded: r2)
+        result[6] = UInt8(truncatingIfNeeded: r3 >> 8)
+        result[7] = UInt8(truncatingIfNeeded: r3)
+        
+        return result
     }
     
     private func concat2Bytes(first: UInt8, second: UInt8) -> Int {
-        return Int((first & 0xFF) << 8 | second & 0xFF)    // xxxxxxxxxxxxxxxx
+        return (Int(bitPattern: UInt(first)) & 0xFF) << 8
+            | Int(bitPattern: UInt(second)) & 0xFF
     }
     
-    func generateSubkeys(userKey: [UInt8]) -> [Int] {
+    private func generateSubkeys(userKey: [UInt8]) -> [Int] {
         assert(userKey.count == 16)
         var key: [Int] = [Int](repeating: 0, count: ROUNDS * 6 + 4) // 52 16-bit subkeys
         
         // The 128-bit userKey is divided into eight 16-bit subkeys
         var b1, b2: Int
         for i in (0..<userKey.count / 2) {
-            key[i] = concat2Bytes(first: userKey[2 * i], second: userKey[2 * i + 1])
+            key[i] = concat2Bytes(first: userKey[2 * i],
+                                  second: userKey[2 * i + 1])
         }
         
         // The key is rotated 25 bits to the left and again divided into eight subkeys.
         // The first four are used in round 2 the last four are used in round 3.
         // The key is rotated another 25 bits to the left for the next eight subkeys, and so on.
-        for i in (userKey.count / 2..<userKey.count) {
+        for i in (userKey.count / 2..<key.count) {
             // It starts combining k1 shifted 9 bits with k2. This is 16 bits of k0 + 9 bits shifted from k1 = 25 bits
             b1 = key[(i + 1) % 8 != 0 ? i - 7 : i - 15] << 9   // k1,k2,k3...k6,k7,k0,k9, k10...k14,k15,k8,k17,k18...
             b2 = key[(i + 2) % 8 < 2 ? i - 14 : i - 6] >>> 7   // k2,k3,k4...k7,k0,k1,k10,k11...k15,k8, k9,k18,k19...
@@ -216,7 +127,7 @@ class IDEAService {
         return key
     }
     
-    func invertSubkey(subkey: [Int]) -> [Int] {
+    private func invertSubkey(subkey: [Int]) -> [Int] {
         var invSubkey: [Int] = subkey
         var p = 0
         var i = ROUNDS * 6
@@ -314,4 +225,19 @@ infix operator >>> : BitwiseShiftPrecedence
 
 func >>> (lhs: Int, rhs: Int) -> Int {
     return Int(bitPattern: UInt(bitPattern: lhs) >> UInt(rhs))
+}
+
+
+extension Array where Array.Element == UInt8 {
+    
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            var tmp = [Element](repeating: 0, count: size)
+            for i in ($0..<Swift.min($0+size, count)) {
+                tmp[i%size] = self[i]
+            }
+            return tmp
+        }
+    }
+    
 }
