@@ -26,20 +26,19 @@ class LoginViewController: UIViewController {
         title = "Authorization"
         loginTextField.delegate = self
         passwordTextField.delegate = self
-        
-        loginTextField.text = "test"
-        passwordTextField.text = "123"
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
+        defer {
+            loginTextField.text = .none
+            passwordTextField.text = .none
+        }
         guard
             let login = loginTextField.text,
             !login.isEmpty,
             let password = passwordTextField.text,
             !password.isEmpty
             else {
-                loginTextField.text = .none
-                passwordTextField.text = .none
                 self.showAlert(title: "Ошибка", message: "Заполините асе поля")
                 return
         }

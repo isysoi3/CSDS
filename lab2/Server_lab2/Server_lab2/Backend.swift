@@ -18,7 +18,9 @@ typealias ProcessRequest = (JSON) -> Result<JSON, BackendErrorEnum>
 
 class Backend {
     
-    private let validUsers = ["test" : "123"]
+    private let validUsers = ["test1" : "123",
+                              "test2" : "123",
+                              "test3" : "123"]
     private var currentSessions: [String : String] = [:]
     private let ideaService = IDEAService()
     private let rsaService = RSAService()
