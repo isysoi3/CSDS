@@ -26,6 +26,25 @@ class LoginViewController: UIViewController {
         title = "Authorization"
         loginTextField.delegate = self
         passwordTextField.delegate = self
+        askAboutIP()
+    }
+    
+    private func askAboutIP() {
+        let alert = UIAlertController(title: "Enter server ip or empty for default", message: nil, preferredStyle: .alert)
+
+        alert.addTextField(configurationHandler: .none)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert, weak self] (_) in
+            if let text = alert?.textFields![0].text  {
+                if !text.isEmpty {
+                    ServerRepository.shared.ip = text
+                }
+            } else {
+                self?.askAboutIP()
+            }
+        }))
+
+        self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func loginButtonTapped(_ sender: Any) {
