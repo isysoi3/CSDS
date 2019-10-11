@@ -18,7 +18,7 @@ class ServerRepository {
     private let service: IDEAService
     var ip = "192.168.100.222:8181"
     private var serverURL: String {
-        "http://" + ip + "/api/v1"
+        "http://" + ip + ":8181" + "/api/v1"
     }
     
     private init () {
