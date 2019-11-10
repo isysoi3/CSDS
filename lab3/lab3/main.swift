@@ -8,8 +8,22 @@
 
 import Foundation
 
-print("Hello, World!")
+let group = EllipticCurve(coefficients: Coefficients(1, 0), module: 23)
+var key = EllepticalKey(group: group)
+var clientA = Client(group: group)
+key.pA = clientA.generateKey(for: key)
 
-let group = EllipticCurve(coefficients: Coefficients(1, 1), module: 53)
+var clientB = Client(group: group)
+key.pB = clientB.generateKey(for: key)
 
-print(group.points)
+clientA.generateOpenKey(for: key.pB)
+clientB.generateOpenKey(for: key.pA)
+
+print(clientA.k == clientB.k)
+print(clientA.k!)
+print(clientB.k!)
+
+let se = getSignature(message: "sdsd", key: key, client: clientB)
+print(se)
+
+checkSignature(signature: se, message: "sdsd", key: key)

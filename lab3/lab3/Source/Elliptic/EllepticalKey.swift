@@ -15,10 +15,10 @@ struct EllepticalKey {
     var pB: EllipticPoint
     let q: Int
     
-    init(group: [EllipticPoint]) {
+    init(group: EllipticCurve) {
         pA = EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
         pB = EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
-        g = group.last(where: {$0.order.isPrime()}) ?? EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
+        g = group.points.last(where: {$0.order.isPrime()}) ?? EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
         q = g.order
     }
     

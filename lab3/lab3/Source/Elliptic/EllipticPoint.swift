@@ -10,7 +10,7 @@ import Foundation
 
 typealias Coefficients = (a: Int, b: Int)
 
-struct EllipticPoint: CustomStringConvertible {
+struct EllipticPoint: CustomStringConvertible, Equatable {
     
     let x: Int
     let y: Int
