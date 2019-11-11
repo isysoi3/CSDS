@@ -68,7 +68,7 @@ struct EllipticCurve {
                 }
             }
         }
-        return result[result.count/2]
+        return result.randomElement()!
     }
     
     private static func isValidCoefficients(_ coefficients: Coefficients, module: Int) -> Bool {

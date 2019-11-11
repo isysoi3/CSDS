@@ -32,16 +32,5 @@ extension Int {
         }
         return nil
     }
-    
-    func modInverse(m: Int) -> Int? {
-        let tmp = self % m
-        for i in 1..<m {
-            if tmp * i % m == 1 {
-                return i
-            }
-        }
-        return nil
-    }
-    
 }
 

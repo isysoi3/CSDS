@@ -59,6 +59,9 @@ struct EllipticPoint: CustomStringConvertible, Equatable {
     func multiply(by mult: Int) -> EllipticPoint {
         var result = self
         let point = self
+        if mult <= 1 {
+            return result
+        }
         for _ in (1..<mult) {
             result = result + point
         }

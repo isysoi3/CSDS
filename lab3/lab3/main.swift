@@ -9,23 +9,28 @@
 import Foundation
 
 let group = EllipticCurve(module: 53)
-print(group.points)
 
 var key = EllepticalKey(group: group)
 var clientA = Client(group: group)
-key.pA = clientA.generateKey(for: key)
+key.pA = clientA.generateOpenKey(with: key.g)
 
 var clientB = Client(group: group)
-key.pB = clientB.generateKey(for: key)
+key.pB = clientB.generateOpenKey(with: key.g)
 
-clientA.generateOpenKey(for: key.pB)
-clientB.generateOpenKey(for: key.pA)
+clientA.generateKey(with: key.pB)
+clientB.generateKey(with: key.pA)
 
-print(clientA.k == clientB.k)
-print(clientA.k!)
-print(clientB.k!)
+print("A == B :", clientA.k == clientB.k)
+print("A : \(clientA.k!)")
+print("B : \(clientB.k!)")
+print()
 
-let se = getSignature(message: "sdsd", key: key, client: clientB)
+let se = clientA.getSignature(message: "sdsd", key: key)
 print(se)
+print()
 
-checkSignature(signature: se, message: "sdsd", key: key)
+print("Valid", clientB.checkSignature(signature: se, message: "sdsd", key: key))
+print()
+
+print("Invalid", clientB.checkSignature(signature: (1,4), message: "sdsd", key: key))
+print()
