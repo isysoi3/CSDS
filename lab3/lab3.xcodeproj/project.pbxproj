@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D357E6852375724C004FED38 /* TonelliShanks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D357E6842375724C004FED38 /* TonelliShanks.swift */; };
 		D357E6872375743C004FED38 /* EllepticalKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D357E6862375743C004FED38 /* EllepticalKey.swift */; };
 		D357E689237578FC004FED38 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = D357E688237578FC004FED38 /* Client.swift */; };
 		D36B3333237562F700ED9E40 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B3332237562F700ED9E40 /* main.swift */; };
@@ -29,7 +28,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D357E6842375724C004FED38 /* TonelliShanks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonelliShanks.swift; sourceTree = "<group>"; };
 		D357E6862375743C004FED38 /* EllepticalKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllepticalKey.swift; sourceTree = "<group>"; };
 		D357E688237578FC004FED38 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		D36B332F237562F700ED9E40 /* lab3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lab3; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +78,6 @@
 			children = (
 				D36B333E2375664800ED9E40 /* Helpers */,
 				D36B3341237570DF00ED9E40 /* Elliptic */,
-				D357E6842375724C004FED38 /* TonelliShanks.swift */,
 				D357E688237578FC004FED38 /* Client.swift */,
 			);
 			path = Source;
@@ -165,7 +162,6 @@
 				D357E6872375743C004FED38 /* EllepticalKey.swift in Sources */,
 				D357E689237578FC004FED38 /* Client.swift in Sources */,
 				D36B3333237562F700ED9E40 /* main.swift in Sources */,
-				D357E6852375724C004FED38 /* TonelliShanks.swift in Sources */,
 				D36B33402375665E00ED9E40 /* IntExtension.swift in Sources */,
 				D36B333D2375637100ED9E40 /* EllipticPoint.swift in Sources */,
 				D36B333B2375634500ED9E40 /* EllipticCurve.swift in Sources */,

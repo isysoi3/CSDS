@@ -22,6 +22,18 @@ struct EllipticPoint: CustomStringConvertible, Equatable {
     }
     
     var order: Int {
+        var list = [self]
+        while (true) {
+            let current = list.last! + self
+            if !list.contains(current) {
+                list.append(current)
+            }
+            else {
+                break
+            }
+        }
+        return list.count
+        
         let m = Int(pow(Double(module + 1 + 20) * pow(Double(module), 0.5), 0.5))
         var table = [EllipticPoint(x: x, y: y, module: module + 1, coefficients: coefficients)]
         for i in (1...m) {
@@ -78,7 +90,7 @@ struct EllipticPoint: CustomStringConvertible, Equatable {
     }
     
     static func +(lhs: EllipticPoint, rhs: EllipticPoint) -> EllipticPoint {
-        let slope = (lhs == rhs ?
+        let lambda = (lhs == rhs ?
             onModules(valueUp: 3 * lhs.x.pow(by: 2) + lhs.coefficients.a,
                       valueDown: 2 * lhs.y,
                       module: lhs.module)
@@ -86,8 +98,8 @@ struct EllipticPoint: CustomStringConvertible, Equatable {
                         valueDown: rhs.x - lhs.x,
                         module: lhs.module)
         )
-        let x = addOnValue(slope.pow(by: 2) - lhs.x - rhs.x, module: lhs.module)
-        let y = addOnValue(slope * (lhs.x - x) - lhs.y, module: lhs.module)
+        let x = addOnValue(lambda.pow(by: 2) - lhs.x - rhs.x, module: lhs.module)
+        let y = addOnValue(lambda * (lhs.x - x) - lhs.y, module: lhs.module)
         return EllipticPoint(x: x,
                              y: y,
                              module: lhs.module,

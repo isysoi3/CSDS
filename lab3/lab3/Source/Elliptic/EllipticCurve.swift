@@ -75,23 +75,23 @@ struct EllipticCurve {
         (4 * coefficients.a.pow(by: 3) + 27 * coefficients.b.pow(by: 2)) % module != 0
     }
     
-    private func Legendre(_ a: Int, _ p: Int) -> Int {
-        if a == 0 || a == 1 {
-            return a;
-        }
-        var result: Int
-        if a % 2 == 0 {
-            result = Legendre(a / 2, p)
-            if ((p * p - 1) & 8) != 0 {
-                result = -result
-            }
-        } else {
-            result = Legendre(p % a, a)
-            if ((a - 1) * (p - 1) & 4) != 0 {
-                result = -result
-            }
-        }
-        return result;
-    }
+//    private func Legendre(_ a: Int, _ p: Int) -> Int {
+//        if a == 0 || a == 1 {
+//            return a;
+//        }
+//        var result: Int
+//        if a % 2 == 0 {
+//            result = Legendre(a / 2, p)
+//            if ((p * p - 1) & 8) != 0 {
+//                result = -result
+//            }
+//        } else {
+//            result = Legendre(p % a, a)
+//            if ((a - 1) * (p - 1) & 4) != 0 {
+//                result = -result
+//            }
+//        }
+//        return result;
+//    }
     
 }

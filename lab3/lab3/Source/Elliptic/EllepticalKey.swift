@@ -18,7 +18,10 @@ struct EllepticalKey {
     init(group: EllipticCurve) {
         pA = EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
         pB = EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
-        g = group.points.last(where: {$0.order.isPrime()}) ?? EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
+        g = group.points
+            .filter { $0.order.isPrime() }
+            .max(by: { $0.order < $1.order})
+            ?? EllipticPoint(x: 0, y: 0, module: 0, coefficients: (0, 0))
         q = g.order
     }
     

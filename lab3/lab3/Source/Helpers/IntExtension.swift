@@ -25,11 +25,19 @@ extension Int {
     
     func squareRoot(by p: Int) -> Int? {
         let tmp = self % p;
-      
-        // One by one check all numbers from 2 to p-1
         for x in (0..<p) {
             if (x * x) % p == tmp {
                 return x
+            }
+        }
+        return nil
+    }
+    
+    func modInverse(m: Int) -> Int? {
+        let tmp = self % m
+        for i in 1..<m {
+            if tmp * i % m == 1 {
+                return i
             }
         }
         return nil
