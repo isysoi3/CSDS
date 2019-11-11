@@ -23,4 +23,17 @@ extension Int {
         return self > 1 && !(2...maxDivider).contains { self % $0 == 0 }
     }
     
+    func squareRoot(by p: Int) -> Int? {
+        let tmp = self % p;
+      
+        // One by one check all numbers from 2 to p-1
+        for x in (0..<p) {
+            if (x * x) % p == tmp {
+                return x
+            }
+        }
+        return nil
+    }
+    
 }
+

@@ -15,36 +15,35 @@ struct EllipticCurve {
     
     var points: [EllipticPoint] {
         var result: [EllipticPoint] = []
-//        for x in (0..<module) {
-//            let ySquare = (x.pow(by: 3) + coefficients.a * x + coefficients.b) % module
-//            let isSquare = Legendre(ySquare, module) != -1
-//            if isSquare {
-//                let y = Int(TonelliShanks.ShanksSqrt(ySquare, Module))
-//                result.append(EllipticPoint(x: x,
-//                                            y: y,
-//                                            module: module,
-//                                            coefficients: coefficients))
-//                if y != 0 {
-//                    result.append(EllipticPoint(x: x,
-//                                                y: module - y,
-//                                                module: module,
-//                                                coefficients: coefficients))
-//                }
-//            }
-//        }
-//        return result
-        
-        var yValues: [Int] = []
-        var xValues: [Int] = []
-        for i in (0..<module) {
-            yValues.append(i * i % module)
-            xValues.append((i.pow(by: 3) + coefficients.a * i + coefficients.b) % module)
+        for x in (0..<module) {
+            let ySquare = (x.pow(by: 3) + coefficients.a * x + coefficients.b) % module
+            
+            if let y = ySquare.squareRoot(by: module) {
+                result.append(EllipticPoint(x: x,
+                                            y: y,
+                                            module: module,
+                                            coefficients: coefficients))
+                if y != 0 {
+                    result.append(EllipticPoint(x: x,
+                                                y: module - y,
+                                                module: module,
+                                                coefficients: coefficients))
+                }
+            }
         }
-        
-        return zip(xValues, yValues).map { EllipticPoint(x: $0.0,
-                                                         y: $0.1,
-                                                         module: module,
-                                                         coefficients: coefficients)}
+        return result
+//
+//        var yValues: [Int] = []
+//        var xValues: [Int] = []
+//        for i in (0..<module) {
+//            yValues.append(i * i % module)
+//            xValues.append((i.pow(by: 3) + coefficients.a * i + coefficients.b) % module)
+//        }
+//
+//        return zip(xValues, yValues).map { EllipticPoint(x: $0.0,
+//                                                         y: $0.1,
+//                                                         module: module,
+//                                                         coefficients: coefficients)}
     }
     
     init(coefficients: Coefficients, module: Int) {

@@ -8,7 +8,8 @@
 
 import Foundation
 
-let group = EllipticCurve(coefficients: Coefficients(1, 0), module: 23)
+let group = EllipticCurve(coefficients: (1, 0), module: 23)
+print(group.points)
 var key = EllepticalKey(group: group)
 var clientA = Client(group: group)
 key.pA = clientA.generateKey(for: key)

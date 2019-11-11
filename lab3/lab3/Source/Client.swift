@@ -34,7 +34,7 @@ func modInverse(a: Int, m: Int) -> Int? {
     let tmp = a % m
     for i in 1..<m {
         if (tmp * i % m == 1) {
-            return i;
+            return i
         }
     }
     return nil
