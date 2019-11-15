@@ -14,6 +14,7 @@
 		D36B333B2375634500ED9E40 /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B333A2375634500ED9E40 /* EllipticCurve.swift */; };
 		D36B333D2375637100ED9E40 /* EllipticPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B333C2375637100ED9E40 /* EllipticPoint.swift */; };
 		D36B33402375665E00ED9E40 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B333F2375665E00ED9E40 /* IntExtension.swift */; };
+		D3E182CA237EAF1400D4D46F /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E182C9237EAF1400D4D46F /* test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		D36B333A2375634500ED9E40 /* EllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurve.swift; sourceTree = "<group>"; };
 		D36B333C2375637100ED9E40 /* EllipticPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticPoint.swift; sourceTree = "<group>"; };
 		D36B333F2375665E00ED9E40 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		D3E182C9237EAF1400D4D46F /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +61,6 @@
 				884D5B9E1EAE3F4E2471E76B /* Pods-lab3.debug.xcconfig */,
 				AB44B6DFD41D5D0D62252C23 /* Pods-lab3.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -93,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				D36B33392375631A00ED9E40 /* Source */,
+				D3E182C8237EAF0500D4D46F /* Test */,
 				D36B3332237562F700ED9E40 /* main.swift */,
 			);
 			path = lab3;
@@ -124,6 +126,14 @@
 				D357E6862375743C004FED38 /* EllepticalKey.swift */,
 			);
 			path = Elliptic;
+			sourceTree = "<group>";
+		};
+		D3E182C8237EAF0500D4D46F /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				D3E182C9237EAF1400D4D46F /* test.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +226,7 @@
 				D36B33402375665E00ED9E40 /* IntExtension.swift in Sources */,
 				D36B333D2375637100ED9E40 /* EllipticPoint.swift in Sources */,
 				D36B333B2375634500ED9E40 /* EllipticCurve.swift in Sources */,
+				D3E182CA237EAF1400D4D46F /* test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

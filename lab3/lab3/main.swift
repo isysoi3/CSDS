@@ -28,9 +28,11 @@ print()
 let se = clientA.getSignature(message: "sdsd", key: key)
 print(se)
 print()
-
-print("Valid", clientB.checkSignature(signature: se, message: "sdsd", key: key))
+    
+print("Valid", clientB.checkSignature(signature: se, message: "sasd", key: key))
 print()
 
 print("Invalid", clientB.checkSignature(signature: (1,4), message: "sdsd", key: key))
 print()
+
+test()
