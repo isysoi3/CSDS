@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C9483EB898ED569BDDEDF77B /* libPods-Server_lab4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99852268D33F5D9859C5EC27 /* libPods-Server_lab4.a */; };
+		D34A9E7B238AE84900D0D90A /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A9E7A238AE84900D0D90A /* AuthService.swift */; };
 		D361ED53234BBAED000F1E38 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED52234BBAED000F1E38 /* main.swift */; };
 		D361ED68234BBBE4000F1E38 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED65234BBBE4000F1E38 /* Router.swift */; };
 		D361ED69234BBBE4000F1E38 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED66234BBBE4000F1E38 /* Backend.swift */; };
@@ -35,6 +36,7 @@
 		403921E9385C7A813120C4B6 /* Pods-Server_lab2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab2.release.xcconfig"; path = "Target Support Files/Pods-Server_lab2/Pods-Server_lab2.release.xcconfig"; sourceTree = "<group>"; };
 		99852268D33F5D9859C5EC27 /* libPods-Server_lab4.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Server_lab4.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B88A38CDB03F7334BD11F373 /* Pods-Server_lab4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab4.release.xcconfig"; path = "Target Support Files/Pods-Server_lab4/Pods-Server_lab4.release.xcconfig"; sourceTree = "<group>"; };
+		D34A9E7A238AE84900D0D90A /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		D361ED4F234BBAED000F1E38 /* Server_lab4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server_lab4; sourceTree = BUILT_PRODUCTS_DIR; };
 		D361ED52234BBAED000F1E38 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D361ED65234BBBE4000F1E38 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				D361ED6D234BBC36000F1E38 /* RSAService.swift */,
 				D361ED6E234BBC36000F1E38 /* FileService.swift */,
 				D361ED6F234BBC36000F1E38 /* IDEAService.swift */,
+				D34A9E7A238AE84900D0D90A /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				D361ED72234BBC48000F1E38 /* RSAService.swift in Sources */,
 				D3F363F2238AC795005AD05C /* StringExtension.swift in Sources */,
 				D361ED75234BBC6C000F1E38 /* Array+StringTuple.swift in Sources */,
+				D34A9E7B238AE84900D0D90A /* AuthService.swift in Sources */,
 				D361ED69234BBBE4000F1E38 /* Backend.swift in Sources */,
 				D361ED71234BBC44000F1E38 /* FileService.swift in Sources */,
 			);
