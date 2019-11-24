@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import BigInt
+import KeychainSwift
 
 enum BackendErrorEnum: Error {
     case error(String)
@@ -18,14 +19,28 @@ typealias ProcessRequest = (JSON) -> Result<JSON, BackendErrorEnum>
 
 class Backend {
     
+    typealias ReturnType = Result<JSON, BackendErrorEnum>
+
     private let validUsers = ["test1" : "123",
                               "test2" : "123",
                               "test3" : "123"]
     private var currentSessions: [String : String] = [:]
     private let ideaService = IDEAService()
     private let rsaService = RSAService()
+    private let key: String
     
-    typealias ReturnType = Result<JSON, BackendErrorEnum>
+    init() {
+        let keychain = KeychainSwift()
+        if let key = keychain.get("Key") {
+            self.key = key
+        } else {
+            key = String.generateRandomString(length: 16)
+            keychain.set(key, forKey: "Key")
+        }
+//        let text = """
+//                   """
+//        try? FileService.write(text, to: "test", with: key)
+    }
     
     func getFiles() -> ReturnType {
         guard let files = FileService.getFiles() else {
@@ -45,11 +60,11 @@ class Backend {
         guard FileService.containsFile(name: filename) else {
             return .failure(.error("\(filename) не найден"))
         }
-        guard let text = try? FileService.read(from: filename) else {
+        guard let text = try? FileService.read(from: "test", with: self.key) else {
             return .failure(.error("Не удалось прочитать файл"))
         }
         let encoded = ideaService.encode(text: text,
-                                     key: key)
+                                         key: key)
         return .success(JSON(["text" : encoded]))
     }
     
@@ -73,7 +88,7 @@ class Backend {
         let mS = m.replacingOccurrences(of: "%2B", with: "+").replacingOccurrences(of: "%3D", with: "=")
         let exponent = BigUInt(eS.base64Data!)
         let modulus = BigUInt(mS.base64Data!)
-        let randomSting = generateRandomString(length: 16)
+        let randomSting = String.generateRandomString(length: 16)
         let encodedText: BigUInt = rsaService.encode(
             text: randomSting,
             publicKey: RSAService.Key(exponent: exponent,
@@ -81,11 +96,6 @@ class Backend {
         currentSessions[login] = randomSting
         return .success(JSON(["key" : Array(encodedText.serialize()),
                               "token" : login]))
-    }
-    
-    private func generateRandomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
 }

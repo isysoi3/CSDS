@@ -16,6 +16,7 @@
 		D361ED71234BBC44000F1E38 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED6E234BBC36000F1E38 /* FileService.swift */; };
 		D361ED72234BBC48000F1E38 /* RSAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED6D234BBC36000F1E38 /* RSAService.swift */; };
 		D361ED75234BBC6C000F1E38 /* Array+StringTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED74234BBC6C000F1E38 /* Array+StringTuple.swift */; };
+		D3F363F2238AC795005AD05C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F363F1238AC795005AD05C /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,7 @@
 		D361ED6F234BBC36000F1E38 /* IDEAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDEAService.swift; sourceTree = "<group>"; };
 		D361ED74234BBC6C000F1E38 /* Array+StringTuple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+StringTuple.swift"; sourceTree = "<group>"; };
 		D361ED76234BBD16000F1E38 /* BigInt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BigInt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3F363F1238AC795005AD05C /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E5C0FDDE2A31F163F4270F57 /* Pods-Server_lab2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab2.debug.xcconfig"; path = "Target Support Files/Pods-Server_lab2/Pods-Server_lab2.debug.xcconfig"; sourceTree = "<group>"; };
 		FAC66AE871909FCB9F51D2CC /* Pods-Server_lab4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab4.debug.xcconfig"; path = "Target Support Files/Pods-Server_lab4/Pods-Server_lab4.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				D361ED74234BBC6C000F1E38 /* Array+StringTuple.swift */,
+				D3F363F1238AC795005AD05C /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				D361ED6A234BBBE4000F1E38 /* Server.swift in Sources */,
 				D361ED70234BBC41000F1E38 /* IDEAService.swift in Sources */,
 				D361ED72234BBC48000F1E38 /* RSAService.swift in Sources */,
+				D3F363F2238AC795005AD05C /* StringExtension.swift in Sources */,
 				D361ED75234BBC6C000F1E38 /* Array+StringTuple.swift in Sources */,
 				D361ED69234BBBE4000F1E38 /* Backend.swift in Sources */,
 				D361ED71234BBC44000F1E38 /* FileService.swift in Sources */,

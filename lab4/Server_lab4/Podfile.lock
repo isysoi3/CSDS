@@ -1,24 +1,28 @@
 PODS:
   - BigInt (4.0.0)
+  - KeychainSwift (18.0.0)
   - Swifter (1.4.7)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - BigInt
+  - KeychainSwift
   - Swifter
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - BigInt
+    - KeychainSwift
     - Swifter
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   BigInt: 2aad1a9942dc932ec8b84290d2c564a3d76f97ab
+  KeychainSwift: c46e1438d121e47459fb304ac88c5e058a2a91ed
   Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 3e1a9a7512ff3897a864fbee4e1e6bcc5df4ab76
+PODFILE CHECKSUM: b5163020b49f7f91c26cb473e2d3e6363dd1bca4
 
 COCOAPODS: 1.8.4

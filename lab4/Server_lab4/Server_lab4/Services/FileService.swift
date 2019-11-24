@@ -20,6 +20,19 @@ class FileService {
         try text.write(to: filename, atomically: false, encoding: .utf8)
     }
     
+    static func write(_ text: String, to filename: String, with key: String) throws {
+        let filename = getDocumentsDirectory().appendingPathComponent(filename + ".data")
+        let data = IDEAService().encode(text: text, key: key)
+        let pointer = UnsafeBufferPointer(start: data, count: data.count)
+        try Data(buffer: pointer).write(to: filename)
+    }
+    
+    static func read(from filename: String, with key: String) throws -> String {
+        let filename = getDocumentsDirectory().appendingPathComponent(filename + ".data")
+        let data = try Data(contentsOf: filename)
+        return IDEAService().decode(data: Array(data), key: key)
+    }
+    
     static func read(from filename: String) throws -> String  {
         let filename = getDocumentsDirectory().appendingPathComponent(filename + ".txt")
         return try String(contentsOf: filename, encoding: .utf8)
@@ -31,7 +44,11 @@ class FileService {
         do {
             let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL,
                                                                includingPropertiesForKeys: nil)
-            return fileURLs.compactMap { $0.isFileURL && $0.pathComponents.last!.contains("txt") ? $0.pathComponents.last! : .none}
+            return fileURLs.compactMap {
+                ($0.isFileURL && $0.pathComponents.last!.contains("data"))
+                ? $0.pathComponents.last!
+                : .none
+            }
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
@@ -39,7 +56,7 @@ class FileService {
     }
     
     static func containsFile(name: String) -> Bool {
-        let filename = name + ".txt"
+        let filename = name + ".data"
         guard
             let files = FileService.getFiles(),
             !files.isEmpty,
