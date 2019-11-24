@@ -1,0 +1,9 @@
+platform :ios, '13.0'
+
+target 'Client_lab4' do
+  use_frameworks!
+  pod 'BigInt'
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
+  pod 'KeychainSwift'
+end
