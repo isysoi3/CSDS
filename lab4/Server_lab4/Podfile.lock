@@ -1,12 +1,14 @@
 PODS:
   - BigInt (4.0.0)
   - KeychainSwift (18.0.0)
+  - SendGrid (2.2.0)
   - Swifter (1.4.7)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - BigInt
   - KeychainSwift
+  - SendGrid (from `https://github.com/scottkawai/sendgrid-swift.git`)
   - Swifter
   - SwiftyJSON
 
@@ -17,12 +19,22 @@ SPEC REPOS:
     - Swifter
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  SendGrid:
+    :git: https://github.com/scottkawai/sendgrid-swift.git
+
+CHECKOUT OPTIONS:
+  SendGrid:
+    :commit: 0cabd388dfcf7301390be62167583c2deea46151
+    :git: https://github.com/scottkawai/sendgrid-swift.git
+
 SPEC CHECKSUMS:
   BigInt: 2aad1a9942dc932ec8b84290d2c564a3d76f97ab
   KeychainSwift: c46e1438d121e47459fb304ac88c5e058a2a91ed
+  SendGrid: 0554c988d042609ab63f4388b96b093b82c091a7
   Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: b5163020b49f7f91c26cb473e2d3e6363dd1bca4
+PODFILE CHECKSUM: 1c4434c923249cffd1f89585bf2dbfb6e9177256
 
 COCOAPODS: 1.8.4

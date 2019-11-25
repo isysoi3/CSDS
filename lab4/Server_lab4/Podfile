@@ -7,5 +7,6 @@ target 'Server_lab4' do
   pod 'BigInt'
   pod 'SwiftyJSON'
   pod 'KeychainSwift'
-
+  pod 'SendGrid', :git => 'https://github.com/scottkawai/sendgrid-swift.git'
+  
 end

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C9483EB898ED569BDDEDF77B /* libPods-Server_lab4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99852268D33F5D9859C5EC27 /* libPods-Server_lab4.a */; };
 		D34A9E7B238AE84900D0D90A /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A9E7A238AE84900D0D90A /* AuthService.swift */; };
+		D34A9E7F238C4E2700D0D90A /* MailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A9E7E238C4E2700D0D90A /* MailService.swift */; };
 		D361ED53234BBAED000F1E38 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED52234BBAED000F1E38 /* main.swift */; };
 		D361ED68234BBBE4000F1E38 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED65234BBBE4000F1E38 /* Router.swift */; };
 		D361ED69234BBBE4000F1E38 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED66234BBBE4000F1E38 /* Backend.swift */; };
@@ -17,6 +18,7 @@
 		D361ED71234BBC44000F1E38 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED6E234BBC36000F1E38 /* FileService.swift */; };
 		D361ED72234BBC48000F1E38 /* RSAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED6D234BBC36000F1E38 /* RSAService.swift */; };
 		D361ED75234BBC6C000F1E38 /* Array+StringTuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED74234BBC6C000F1E38 /* Array+StringTuple.swift */; };
+		D3CA6AD8238C6712003FDFA6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA6AD7238C6712003FDFA6 /* User.swift */; };
 		D3F363F2238AC795005AD05C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F363F1238AC795005AD05C /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,7 @@
 		99852268D33F5D9859C5EC27 /* libPods-Server_lab4.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Server_lab4.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B88A38CDB03F7334BD11F373 /* Pods-Server_lab4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab4.release.xcconfig"; path = "Target Support Files/Pods-Server_lab4/Pods-Server_lab4.release.xcconfig"; sourceTree = "<group>"; };
 		D34A9E7A238AE84900D0D90A /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		D34A9E7E238C4E2700D0D90A /* MailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailService.swift; sourceTree = "<group>"; };
 		D361ED4F234BBAED000F1E38 /* Server_lab4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server_lab4; sourceTree = BUILT_PRODUCTS_DIR; };
 		D361ED52234BBAED000F1E38 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D361ED65234BBBE4000F1E38 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		D361ED6F234BBC36000F1E38 /* IDEAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDEAService.swift; sourceTree = "<group>"; };
 		D361ED74234BBC6C000F1E38 /* Array+StringTuple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+StringTuple.swift"; sourceTree = "<group>"; };
 		D361ED76234BBD16000F1E38 /* BigInt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BigInt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3CA6AD7238C6712003FDFA6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D3F363F1238AC795005AD05C /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E5C0FDDE2A31F163F4270F57 /* Pods-Server_lab2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab2.debug.xcconfig"; path = "Target Support Files/Pods-Server_lab2/Pods-Server_lab2.debug.xcconfig"; sourceTree = "<group>"; };
 		FAC66AE871909FCB9F51D2CC /* Pods-Server_lab4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Server_lab4.debug.xcconfig"; path = "Target Support Files/Pods-Server_lab4/Pods-Server_lab4.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		D361ED51234BBAED000F1E38 /* Server_lab4 */ = {
 			isa = PBXGroup;
 			children = (
+				D3CA6AD6238C6701003FDFA6 /* Models */,
 				D361ED73234BBC6C000F1E38 /* Extensions */,
 				D361ED6C234BBC36000F1E38 /* Services */,
 				D361ED66234BBBE4000F1E38 /* Backend.swift */,
@@ -122,6 +127,7 @@
 				D361ED6E234BBC36000F1E38 /* FileService.swift */,
 				D361ED6F234BBC36000F1E38 /* IDEAService.swift */,
 				D34A9E7A238AE84900D0D90A /* AuthService.swift */,
+				D34A9E7E238C4E2700D0D90A /* MailService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -133,6 +139,14 @@
 				D3F363F1238AC795005AD05C /* StringExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D3CA6AD6238C6701003FDFA6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3CA6AD7238C6712003FDFA6 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,10 +235,12 @@
 			files = (
 				D361ED68234BBBE4000F1E38 /* Router.swift in Sources */,
 				D361ED53234BBAED000F1E38 /* main.swift in Sources */,
+				D3CA6AD8238C6712003FDFA6 /* User.swift in Sources */,
 				D361ED6A234BBBE4000F1E38 /* Server.swift in Sources */,
 				D361ED70234BBC41000F1E38 /* IDEAService.swift in Sources */,
 				D361ED72234BBC48000F1E38 /* RSAService.swift in Sources */,
 				D3F363F2238AC795005AD05C /* StringExtension.swift in Sources */,
+				D34A9E7F238C4E2700D0D90A /* MailService.swift in Sources */,
 				D361ED75234BBC6C000F1E38 /* Array+StringTuple.swift in Sources */,
 				D34A9E7B238AE84900D0D90A /* AuthService.swift in Sources */,
 				D361ED69234BBBE4000F1E38 /* Backend.swift in Sources */,

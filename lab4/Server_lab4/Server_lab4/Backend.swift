@@ -21,12 +21,11 @@ class Backend {
     
     typealias ReturnType = Result<JSON, BackendErrorEnum>
 
-    private let validUsers = ["test1" : "123",
-                              "test2" : "123",
-                              "test3" : "123"]
-    private var currentSessions: [String : String] = [:]
+    private let validUsers = users
+    private var currentSessions: [String : UserAuthInfo] = [:]
     private let ideaService = IDEAService()
     private let rsaService = RSAService()
+    private let mailService = MailService()
     private let key: String
     
     init() {
@@ -51,8 +50,8 @@ class Backend {
     
     func getFile(queryParams: [(String, String)]) -> ReturnType {
         guard let token = queryParams.getValueForKey("token"),
-            let key = currentSessions[token] else {
-            return .failure(.error("На токен"))
+            let key = currentSessions[token]?.key else {
+            return .failure(.error("Неправильрный токен"))
         }
         guard let filename = queryParams.getValueForKey("name") else {
             return .failure(.error("На задано имя файла"))
@@ -75,8 +74,8 @@ class Backend {
                 return .failure(.error("На задан логин или пароль"))
         }
         guard
-            let validPasswordForUser = validUsers[login],
-            password == validPasswordForUser else {
+            let user = validUsers.first(where: { $0.login == login }),
+            user.password == password else {
                 return .failure(.error("Неправильный логин или пароль"))
         }
         guard
@@ -88,14 +87,39 @@ class Backend {
         let mS = m.replacingOccurrences(of: "%2B", with: "+").replacingOccurrences(of: "%3D", with: "=")
         let exponent = BigUInt(eS.base64Data!)
         let modulus = BigUInt(mS.base64Data!)
-        let randomSting = String.generateRandomString(length: 16)
+        let randomKey = String.generateRandomString(length: 16)
         let encodedText: BigUInt = rsaService.encode(
-            text: randomSting,
+            text: randomKey,
             publicKey: RSAService.Key(exponent: exponent,
                                       modulus: modulus))
-        currentSessions[login] = randomSting
-        return .success(JSON(["key" : Array(encodedText.serialize()),
-                              "token" : login]))
+        
+        let randomToken = String.generateRandomString(length: 9)
+        let userAuth = UserAuthInfo(key: randomKey,
+                                    encodedKey: Array(encodedText.serialize()))
+        currentSessions[randomToken] = userAuth
+        mailService.sendOTPInMessage(to: user.mail,
+                                     message: "Login: \(user.login)\nOTP:\(userAuth.otp)")
+        return .success(JSON(["token" : randomToken]))
+    }
+    
+    func checkOTP(params: [String : String]) -> ReturnType {
+        guard
+            let token = params["token"],
+            let authInfo = currentSessions[token]
+            else {
+                return .failure(.error("Неправильрный токен"))
+        }
+        guard
+            let otpString = params["otp"],
+            let otp = Int(otpString),
+            authInfo.otp == otp
+            else {
+                currentSessions.removeValue(forKey: token)
+                return .failure(.error("Неправильрный otp"))
+        }
+        return .success(JSON(["key" : authInfo.encodedKey,
+                              "token" : token]))
+
     }
     
 }

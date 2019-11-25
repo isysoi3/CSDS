@@ -20,7 +20,8 @@ class Router {
         hanldeForPath = [ "/hello" : helloHandler,
                           "/api/v1/files" : getFilesHandler,
                           "/api/v1/file" : getFileHandler,
-                          "/api/v1/login" : loginHandler]
+                          "/api/v1/login" : loginHandler,
+                          "/api/v1/checkOTP" : checkOTPHandler]
     }
     
     private func buildResponseForResult(_ result: Result<JSON, BackendErrorEnum>) -> HttpResponse {
@@ -34,6 +35,15 @@ class Router {
             default:
                 return .ok(.text(""))
             }
+        }
+    }
+    
+    private func getBodyParams(data: Data) -> [String : String]? {
+        String(data: data, encoding: .utf8)?
+            .split(separator: "&")
+            .reduce(into: [String : String]()) {
+                let tmp = $1.split(separator: "=")
+                $0.updateValue(String(tmp[1]), forKey: String(tmp[0]))
         }
     }
     
@@ -68,14 +78,24 @@ fileprivate extension Router {
         guard request.method == "POST" else {
             return HttpResponse.notFound
         }
-        let params = String(data: Data(request.body), encoding: .utf8)?
-            .split(separator: "&")
-            .reduce(into: [String : String]()) {
-                let tmp = $1.split(separator: "=")
-                $0.updateValue(String(tmp[1]), forKey: String(tmp[0]))
+        guard let params = getBodyParams(data: Data(request.body)) else {
+            return HttpResponse.notFound
         }
         
-        let result = backend.checkUser(params: params!)
+        let result = backend.checkUser(params: params)
         return buildResponseForResult(result)
     }
+    
+    func checkOTPHandler(_ request: HttpRequest) -> HttpResponse {
+        guard request.method == "POST" else {
+            return HttpResponse.notFound
+        }
+        guard let params = getBodyParams(data: Data(request.body)) else {
+            return HttpResponse.notFound
+        }
+        
+        let result = backend.checkOTP(params: params)
+        return buildResponseForResult(result)
+    }
+    
 }
