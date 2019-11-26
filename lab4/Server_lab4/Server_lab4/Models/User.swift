@@ -18,15 +18,8 @@ struct User: Hashable {
 
 struct UserAuthInfo {
 
-    let encodedKey: [UInt8]
     let key: String
-    let otp: Int
-    
-    init(key: String, encodedKey: [UInt8]) {
-        self.key = key
-        self.encodedKey = encodedKey
-        otp = Int.random(in: 100000...999999)
-    }
+    let encodedKey: [UInt8]
     
 }
 
