@@ -10,6 +10,9 @@
 		CBB69242171949B7EA060EFE /* Pods_Client_lab4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4CD6BCFCAA46D7BA7A65D5 /* Pods_Client_lab4.framework */; };
 		D361ED412349DF76000F1E38 /* IDEAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361ED402349DF76000F1E38 /* IDEAService.swift */; };
 		D361ED7B234BC09D000F1E38 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D361ED7A234BC09D000F1E38 /* Launch Screen.storyboard */; };
+		D3879F57238D916300CD4052 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3879F55238D916300CD4052 /* OTPViewController.swift */; };
+		D3879F58238D916300CD4052 /* OTPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3879F56238D916300CD4052 /* OTPViewController.xib */; };
+		D3879F5A238EEE2F00CD4052 /* ClientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3879F59238EEE2F00CD4052 /* ClientHelper.swift */; };
 		D3AB11B723475883003D7E9E /* lab2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11B623475883003D7E9E /* lab2Tests.swift */; };
 		D3AB11C1234765C5003D7E9E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AB11BF234765C5003D7E9E /* LoginViewController.swift */; };
 		D3AB11C2234765C5003D7E9E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AB11C0234765C5003D7E9E /* LoginViewController.xib */; };
@@ -50,6 +53,9 @@
 		D30A9E99235091E000A54EBF /* Notes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notes.entitlements; sourceTree = "<group>"; };
 		D361ED402349DF76000F1E38 /* IDEAService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDEAService.swift; sourceTree = "<group>"; };
 		D361ED7A234BC09D000F1E38 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		D3879F55238D916300CD4052 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		D3879F56238D916300CD4052 /* OTPViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPViewController.xib; sourceTree = "<group>"; };
+		D3879F59238EEE2F00CD4052 /* ClientHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHelper.swift; sourceTree = "<group>"; };
 		D39EDF315F0FBD2A71894FC0 /* Pods-Client_lab4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client_lab4.release.xcconfig"; path = "Target Support Files/Pods-Client_lab4/Pods-Client_lab4.release.xcconfig"; sourceTree = "<group>"; };
 		D3AB11B423475883003D7E9E /* Client_lab4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Client_lab4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3AB11B623475883003D7E9E /* lab2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lab2Tests.swift; sourceTree = "<group>"; };
@@ -109,8 +115,18 @@
 			children = (
 				D3F6F7642345024A00377271 /* RSAService.swift */,
 				D361ED402349DF76000F1E38 /* IDEAService.swift */,
+				D3879F59238EEE2F00CD4052 /* ClientHelper.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		D3879F54238D913800CD4052 /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				D3879F55238D916300CD4052 /* OTPViewController.swift */,
+				D3879F56238D916300CD4052 /* OTPViewController.xib */,
+			);
+			path = OTP;
 			sourceTree = "<group>";
 		};
 		D3AB11B523475883003D7E9E /* Client_lab4Tests */ = {
@@ -136,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				D3AB11BE2347658C003D7E9E /* Login */,
+				D3879F54238D913800CD4052 /* OTP */,
 				D3F6F77823453C5900377271 /* Files List */,
 				D3AD896C23466134001C1161 /* Files Details */,
 			);
@@ -345,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3879F58238D916300CD4052 /* OTPViewController.xib in Resources */,
 				D3AB11C2234765C5003D7E9E /* LoginViewController.xib in Resources */,
 				D3F6F77723453C0300377271 /* FilesListViewController.xib in Resources */,
 				D3F6F7592345001000377271 /* Assets.xcassets in Resources */,
@@ -422,6 +440,8 @@
 				D3BE77C723453FB300266EFD /* UITableView+TableAdapter.swift in Sources */,
 				D3BE77CB234541C300266EFD /* FileModel.swift in Sources */,
 				D3AB11C52347E67C003D7E9E /* UIViewController+Alert.swift in Sources */,
+				D3879F5A238EEE2F00CD4052 /* ClientHelper.swift in Sources */,
+				D3879F57238D916300CD4052 /* OTPViewController.swift in Sources */,
 				D3F6F7652345024A00377271 /* RSAService.swift in Sources */,
 				D3F6F7522345000F00377271 /* SceneDelegate.swift in Sources */,
 				D3BE77C323453F9000266EFD /* GenericSectionAdapter.swift in Sources */,
@@ -446,7 +466,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K3EBJ8K5KL;
-				INFOPLIST_FILE = lab2Tests/Info.plist;
+				INFOPLIST_FILE = Client_lab4Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -456,7 +476,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Client_lab4.app/Client_lab4";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notes.app/Notes";
 			};
 			name = Debug;
 		};
@@ -466,7 +486,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K3EBJ8K5KL;
-				INFOPLIST_FILE = lab2Tests/Info.plist;
+				INFOPLIST_FILE = Client_lab4Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -476,7 +496,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Client_lab4.app/Client_lab4";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notes.app/Notes";
 			};
 			name = Release;
 		};

@@ -11,18 +11,36 @@ import BigInt
 
 class AuthService {
     
-    private let validUsers = users
+    private let validUsers = [User(login: "test1", mail: "14_ilya@mail.ru", password: "7467312399753603720"),
+                              User(login: "test2", mail: "14_ilya@mail.ru", password: "7467312399753603720"),
+                              User(login: "test3", mail: "14_ilya@mail.ru", password: "7467312399753603720")]
+    private var usersA: [String : Int]
     private var currentSessions: [String : UserAuthInfo] = [:] //token to info
     private var currentUsers: [String : (otp: String, token: String)] = [:] //login to otp with token
     
     private let rsaService = RSAService()
     private let mailService = MailService()
     
-    func isValidUser(login: String, password: String) -> Bool {
-        if let user = validUsers.first(where: { $0.login == login }) {
-            return user.password == password
+    private static let n = 10000
+    
+    init() {
+        usersA = validUsers.reduce(into: [String : Int]()) {
+            $0[$1.login] = AuthService.n - 1
         }
-        return false
+    }
+    
+    func isValidUser(login: String, password: String) -> Bool {
+        guard
+            let user = validUsers.first(where: { $0.login == login }),
+            let a = usersA[login]
+            else {
+                return false
+        }
+        let isValid = nHash(AuthService.n - a, text: password) == user.password
+        if isValid {
+            usersA[login]! = a - 1
+        }
+        return isValid
     }
     
     func loginUser(login: String, key: RSAService.Key) {
@@ -39,7 +57,7 @@ class AuthService {
         currentUsers[login] = (otp, randomToken)
         
         mailService.sendOTPInMessage(to: user.mail,
-                                     message: "Login: \(user.login)\nOTP:\(otp)")
+                                     message: "Login: \(user.login) OTP: \(otp)")
     }
     
     func getCurrentUserAuthData(_ login: String) -> (otp: String, token: String)? {
@@ -55,28 +73,21 @@ class AuthService {
     }
     
     
-    let n = 10000
-    private(set) var a: Int = 1
-    
-    func checkClient(hash: Int, clientNHash: Int) -> Bool {
-        let isValid = nHash(a, text: String(hash)) == clientNHash
-        if isValid {
-            a += 1
-        }
-        return isValid
+    func getA(login: String) -> Int? {
+        return usersA[login]
     }
     
-    func nHash(_ n: Int, text: String) -> Int {
+    func nHash(_ n: Int, text: String) -> String {
         guard n != 0 else {
             fatalError()
         }
         
-        let hash = djb2Hash(text)
+        let hash = String(djb2Hash(text))
         guard n != 1 else {
             print(hash)
             return hash
         }
-        return nHash(n - 1, text: String(hash))
+        return nHash(n - 1, text: hash)
     }
     
     private func djb2Hash(_ string: String) -> Int {

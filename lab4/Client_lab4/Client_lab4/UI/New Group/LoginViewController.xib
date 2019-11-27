@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="lab2" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Notes" customModuleProvider="target">
             <connections>
                 <outlet property="loginTextField" destination="kyQ-gM-TmH" id="SnK-vQ-1oV"/>
                 <outlet property="passwordTextField" destination="YG0-tv-xTa" id="nGj-t0-zTv"/>
@@ -20,17 +20,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyQ-gM-TmH">
-                    <rect key="frame" x="40" y="331" width="334" height="34"/>
+                    <rect key="frame" x="40" y="231" width="334" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passowrd" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YG0-tv-xTa">
-                    <rect key="frame" x="40" y="385" width="334" height="34"/>
+                    <rect key="frame" x="40" y="285" width="334" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GG2-Ef-Do6">
-                    <rect key="frame" x="188" y="544" width="38" height="30"/>
+                    <rect key="frame" x="188" y="389" width="38" height="30"/>
                     <state key="normal" title="Login"/>
                     <connections>
                         <action selector="loginButtonTapped:" destination="-1" eventType="touchUpInside" id="bHa-J3-UTd"/>
@@ -42,10 +42,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kyQ-gM-TmH" secondAttribute="trailing" constant="40" id="70C-1Q-H2d"/>
                 <constraint firstItem="YG0-tv-xTa" firstAttribute="top" secondItem="kyQ-gM-TmH" secondAttribute="bottom" constant="20" id="I7b-VY-zUZ"/>
                 <constraint firstItem="GG2-Ef-Do6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IK4-vj-Iau"/>
-                <constraint firstItem="GG2-Ef-Do6" firstAttribute="top" secondItem="YG0-tv-xTa" secondAttribute="bottom" constant="125" id="P6F-ZG-wIU"/>
+                <constraint firstItem="GG2-Ef-Do6" firstAttribute="top" secondItem="YG0-tv-xTa" secondAttribute="bottom" constant="70" id="P6F-ZG-wIU"/>
                 <constraint firstItem="YG0-tv-xTa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="TZX-z7-3uB"/>
                 <constraint firstItem="kyQ-gM-TmH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="hiH-ch-Z6N"/>
-                <constraint firstItem="kyQ-gM-TmH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-20" id="i4n-eW-UQO"/>
+                <constraint firstItem="kyQ-gM-TmH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-120" id="i4n-eW-UQO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YG0-tv-xTa" secondAttribute="trailing" constant="40" id="wTp-HK-vf4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

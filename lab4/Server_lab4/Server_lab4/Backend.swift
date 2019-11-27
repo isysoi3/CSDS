@@ -64,6 +64,16 @@ class Backend {
         return .success(JSON(["text" : encoded]))
     }
     
+    func getUserA(queryParams: [(String, String)]) -> ReturnType {
+        guard
+            let login = queryParams.getValueForKey("login"),
+            let a = authService.getA(login: login)
+            else {
+                return .failure(.error("Пользователь не найден"))
+        }
+        return .success(JSON(["a" : a]))
+    }
+    
     func checkUser(params: [String:String]) -> ReturnType {
         guard
             let password = params["password"],

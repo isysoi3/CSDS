@@ -18,6 +18,7 @@ class AppState {
     let rsa = RSAService()
     var keys: RSAService.Keys?
     var token: String? = .none
+    var login: String?
     var serverKey: String? = .none
     
     var publicKey: (RSAService.KeyString) {

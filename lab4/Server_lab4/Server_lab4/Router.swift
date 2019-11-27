@@ -20,6 +20,7 @@ class Router {
         hanldeForPath = [ "/hello" : helloHandler,
                           "/api/v1/files" : getFilesHandler,
                           "/api/v1/file" : getFileHandler,
+                          "/api/v1/getUserA" : getUserAHandler,
                           "/api/v1/login" : loginHandler,
                           "/api/v1/checkOTP" : checkOTPHandler]
     }
@@ -73,6 +74,14 @@ fileprivate extension Router {
         return buildResponseForResult(result)
     }
     
+    func getUserAHandler(_ request: HttpRequest) -> HttpResponse {
+        guard request.method == "GET" else {
+            return HttpResponse.notFound
+        }
+        
+        let result = backend.getUserA(queryParams: request.queryParams)
+        return buildResponseForResult(result)
+    }
     
     func loginHandler(_ request: HttpRequest) -> HttpResponse {
         guard request.method == "POST" else {

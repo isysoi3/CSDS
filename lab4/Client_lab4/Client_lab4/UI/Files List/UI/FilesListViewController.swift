@@ -111,7 +111,7 @@ class FilesListViewController: UIViewController {
                     self?.showAlert(title: "Инфо",
                                     message: message,
                                     okBlock: { [weak self] in
-                                        self?.navigationController?.popViewController(animated: true)
+                                        self?.navigationController?.popToRootViewController(animated: true)
                     })
                 }
             })

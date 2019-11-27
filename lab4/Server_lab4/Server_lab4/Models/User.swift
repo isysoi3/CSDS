@@ -22,7 +22,3 @@ struct UserAuthInfo {
     let encodedKey: [UInt8]
     
 }
-
-let users = [User(login: "test1", mail: "14_ilya@mail.ru", password: "123"),
-             User(login: "test1", mail: "14_ilya@mail.ru", password: "123"),
-             User(login: "test1", mail: "14_ilya@mail.ru", password: "123")]

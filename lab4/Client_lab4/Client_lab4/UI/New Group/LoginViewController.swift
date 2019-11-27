@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = "Authorization"
         loginTextField.delegate = self
         passwordTextField.delegate = self
@@ -31,9 +31,9 @@ class LoginViewController: UIViewController {
     
     private func askAboutIP() {
         let alert = UIAlertController(title: "Enter server ip or empty for default", message: nil, preferredStyle: .alert)
-
+        
         alert.addTextField(configurationHandler: .none)
-
+        
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert, weak self] (_) in
             if let text = alert?.textFields![0].text  {
                 if !text.isEmpty {
@@ -43,10 +43,10 @@ class LoginViewController: UIViewController {
                 self?.askAboutIP()
             }
         }))
-
+        
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     @IBAction func loginButtonTapped(_ sender: Any) {
         defer {
             loginTextField.text = .none
@@ -68,47 +68,68 @@ class LoginViewController: UIViewController {
                                                height: 46)
         self.activityIndicator!.startAnimating()
         self.view.addSubview(self.activityIndicator!)
-        
-        DispatchQueue(label: "keys", qos: .userInitiated).async { [weak self] in
-            guard let `self` = self else { return }
-            ServerRepository.shared.login(
-                login: login,
-                password: password,
-                key: AppState.shared.publicKey) { result in
-                    DispatchQueue.main.async {
-                        self.activityIndicator?.stopAnimating()
-                        self.activityIndicator?.removeFromSuperview()
-                    }
-                    switch result {
-                    case .success(let (token, key)):
-                        AppState.shared.serverKey = key
-                        AppState.shared.token = token
-                        self.navigationController?.pushViewController(FilesListViewController.newInstance(),
-                                                                      animated: true)
-                    case .failure(let error):
-                        switch error {
-                        case .server(let message):
-                            self.showAlert(title: "Ошибка", message: message)
-                        default:
-                            self.showAlert(title: "Ошибка", message: "что то не так")
-                        }
-                    }
+        sendLoginRequests(login: login, password: password) { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.activityIndicator?.stopAnimating()
+                self.activityIndicator?.removeFromSuperview()
             }
-           
+            if let error = error {
+                switch error {
+                case .server(let message):
+                    self.showAlert(title: "Ошибка", message: message)
+                default:
+                    self.showAlert(title: "Ошибка", message: "что то не так")
+                }
+            } else {
+                self.navigationController?.pushViewController(
+                    OTPViewController.newInstance(),
+                    animated: true)
+            }
         }
-        
-        
     }
+}
+
+private extension LoginViewController {
+    
+    func sendLoginRequests(
+        login: String,
+        password: String,
+        completionBlock: @escaping (ServerRepository.FileRepositoryErrorEnum?) -> ()) {
+        DispatchQueue(label: "keys", qos: .userInitiated).async { [weak self] in
+            ServerRepository.shared.getUserA(login: login) { result in
+                switch result {
+                case .success(let a):
+                    let hashPassword = ClientHelper.nHash(a, text: password)
+                    ServerRepository.shared.login(
+                        login: login,
+                        password: hashPassword,
+                        key: AppState.shared.publicKey) { result in
+                            switch result {
+                            case .success:
+                                AppState.shared.login = login
+                                completionBlock(nil)
+                            case .failure(let error):
+                                completionBlock(error)
+                            }
+                    }
+                case .failure(let error):
+                    completionBlock(error)
+                }
+            }
+        }
+    }
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         return true
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         textField.resignFirstResponder()
-
+        
         return true
     }
 }
