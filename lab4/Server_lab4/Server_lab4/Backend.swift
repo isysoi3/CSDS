@@ -56,7 +56,7 @@ class Backend {
         guard FileService.containsFile(name: filename) else {
             return .failure(.error("\(filename) не найден"))
         }
-        guard let text = try? FileService.read(from: "test", with: self.key) else {
+        guard let text = try? FileService.read(from: filename, with: self.key) else {
             return .failure(.error("Не удалось прочитать файл"))
         }
         let encoded = ideaService.encode(text: text,
