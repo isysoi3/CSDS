@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Trending Blog Posts</h1>
+
+<table>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><h4><%= link_to  post.title, post %></h4><br />
+        <%= post.content %> 
+        <h6>Written by <%= post.user.email %></h6></td>
+        <td><%= link_to 'Show', post %><br />
+        <%= link_to 'Edit', edit_post_path(post) %><br />
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.admin? %>
+  <%= link_to 'All Posts', user_posts_path(current_user) %>
+<% else %>
+  <%= link_to 'My Posts', user_posts_path(current_user) %>
+<% end %>
+
+<%= link_to 'New Post', new_user_post_path(current_user) %>

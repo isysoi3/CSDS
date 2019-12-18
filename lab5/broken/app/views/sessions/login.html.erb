@@ -1,0 +1,13 @@
+<%= form_tag(login_path) do %>
+
+  <%= label_tag(:email)%>
+  <%= text_field_tag(:email, params[:email], autofocus: true)%>
+
+
+  <%= label_tag(:password)%>
+  <%= password_field_tag(:password)%>
+
+  <%= submit_tag("Log in", class: "btn btn-primary", id: "login") %>
+
+  <br /><%= link_to "New User", "/users/new" %>
+<% end %>

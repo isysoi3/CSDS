@@ -1,0 +1,20 @@
+Search Results:
+
+<table>
+  <tbody>
+  <% @search_results.each do |res| %>
+    <tr>
+      <td><h4><%= res.title %>
+      <% unless res.public? %>
+        | <span style="color: red">private</span>
+      <% end %>
+      </h4><br />
+      <%= res.content %>
+      <h6>Written by <%= res.user.email %></h6>
+      </td>
+      <td><%= link_to 'Show', res %><br />
+      <%= link_to 'Edit', edit_post_path(res.id) %><br />
+    </tr>
+  <% end %>
+  </tbody>
+</table>

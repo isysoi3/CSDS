@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Blog Posts</h1>
+
+<table>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><h4><%= post.title %>
+        <% unless post.public? %>
+          | <span style="color: red">private</span>
+        <% end %>
+        </h4><br />
+        <%= post.content %>
+
+        <% if current_user.admin? %>
+          <h6>Written by <%= post.user.email %></h6>
+        <% end %>
+        </td>
+        <td><%= link_to 'Show', post %><br />
+        <%= link_to 'Edit', edit_post_path(post) %><br />
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'New Post', new_user_post_path(current_user) %>
